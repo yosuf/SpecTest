@@ -18,6 +18,7 @@ Group participants:
 Folders
 =======
 Assignments: Contains the weekly group assignments which should be delivered.
+
 Individuals: Contains the individual weekly folders per collaborator (student).
 
 The convention for individuals:
