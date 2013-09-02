@@ -14,3 +14,32 @@ Group participants:
 - Khosrow Azizi
 - Prajan Shrestha
 - Jeroen Peeters
+
+Folders
+=======
+Assignments: Contains the weekly group assignments which should be delivered.
+Individuals: Contains the individual weekly folders per collaborator (student).
+
+The convention for individuals:
+week<number>_<initials>
+
+Example: 
+week1_KH
+week1_PS
+
+week5_KH
+week5_PS
+
+Assignments: Contains the weekly group assignments which should be delivered.
+Individuals: Contains the individual weekly folders per collaborator (student).
+
+The convention for individuals:
+week<number>_<initials>
+
+Example: 
+week1_KH
+week1_PS
+
+week5_KH
+week5_PS
+
