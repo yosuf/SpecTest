@@ -11,6 +11,6 @@ No branching. User The master branch only or just keep local branches.
 Group participants:
 
 - Yosuf Haydairy
-- Khosrow Asizi
+- Khosrow Azizi
 - Prajan Shrestha
 - Jeroen Peeters
