@@ -7,3 +7,10 @@ This Project contains the assignments of Software Testing and Specification of S
 
 Rules for collaborators (:
 No branching. User The master branch only or just keep local branches.
+
+Group participants:
+
+- Yosuf Haydairy
+- Khosrow Asizi
+- Prajan Shrestha
+- Jeroen Peeters
