@@ -32,4 +32,4 @@ week5_KH
 week5_PS
 
 
-[Our wiki](https://github.com/yosuf/SpecTest/wiki)
+[Wiki](https://github.com/yosuf/SpecTest/wiki)
