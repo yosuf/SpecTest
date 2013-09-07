@@ -25,11 +25,11 @@ The convention for individuals:
 week<number>_<initials>
 
 Example: 
-week1_KH
-week1_PS
+week1_KH 
+week1_PS 
 
-week5_KH
-week5_PS
+week5_KH 
+week5_PS 
 
 
 [Wiki](https://github.com/yosuf/SpecTest/wiki)
