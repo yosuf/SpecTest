@@ -87,3 +87,45 @@ substring xs ys | prefix xs ys        = True
                 | prefix xs (tail ys) = True
                 | otherwise           = False
                 
+{- 1.18
+  1. lines "test" :: [String]
+  2. 
+  3. zip [True,False] ["a","b"] :: [(Bool, [Char])]
+  4.
+  5. (True ==) :: Bool -> Bool
+
+-}
+
+{- 1.19
+  1.  head :: [a] -> a
+      returns the first element from the list
+      head [1,2,3,4]        (1)
+      
+  2.  last :: [a] -> a
+      returns the last element from the list
+      last [1,2,3,4]        (4)
+      
+  3.  init :: [a] -> [a]
+      returns the list without the last element
+      init [1,2,3,4]        ([1,2,3])
+      
+  4.  fst :: (a, b) -> a
+      returns the first component from the pair/tuple
+      fst ("abc","def")     ("abc")
+      
+  5.  (++) :: [a] -> [a] -> [a]
+      concatenation of two lists. 
+      (++) [1,2] [3,4]      ([1,2,3,4])
+
+      
+  6.  flip :: (a -> b -> c) -> b -> a -> c  
+      takes a function that takes a and b and produces c
+      takes arguments b and a and produces c
+      seems that flip calls the function with the arguments reversed
+      flip (-) 6 2          (-4)
+
+      
+  7.  flip (++) :: [a] -> [a] -> [a]
+      here types are narrowed down as (++) operates on one type only
+      
+-}
