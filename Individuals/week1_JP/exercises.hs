@@ -4,6 +4,11 @@ mnmInt [] = error "empty list"
 mnmInt [x] = x
 mnmInt (x:xs) = min x (mnmInt xs)
 
+prefix :: String -> String -> Bool
+prefix [] ys = True
+prefix (x:xs) [] = False
+prefix (x:xs) (y:ys) = (x==y) && prefix xs ys 
+
 {- 1.1
 
 2 * 3 + 1
@@ -76,3 +81,9 @@ srtString [] = []
 srtString ss = mins:(srtString(removeFstString mins ss)) where mins = mnmString ss
 
 -- 1.17
+
+substring :: String -> String -> Bool
+substring xs ys | prefix xs ys        = True
+                | prefix xs (tail ys) = True
+                | otherwise           = False
+                
