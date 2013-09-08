@@ -62,15 +62,15 @@ charName 'b' = "Boris"
 
 -- Gurads
 
-bmiText :: (RealFloat a) => a -> String
+bmiText :: Float -> String
 bmiText bmi
-	| bmi <= 18.5 = " is considered underweight"
-	| bmi <= 25.0 = " is considered normal"
-	| bmi <= 30.0 = " is considered overweight"
-	| otherwise   = " is considered obese"
+	| bmi <= 18.5 = show bmi ++ " is considered underweight"
+	| bmi <= 25.0 = show bmi ++ " is considered normal"
+	| bmi <= 30.0 = show bmi ++ " is considered overweight"
+	| otherwise   = show bmi ++ " is considered obese"
 
 
-getBmi :: (RealFloat a) => a -> a -> String
+getBmi :: Float -> Float -> String
 getBmi hight weight = bmiText (weight / hight^2)
 
 
