@@ -24,6 +24,15 @@ prime0 :: Integer -> Bool
 prime0 n  | n < 1     = error "not a positive integer"
           | n == 1    = False
           | otherwise = ld n == n
+
+{- 1.1
+
+2 * 3 + 1
+2 * (3 + 1)
+1 + 2 - 1 * 3
+4 / 3 * 3 + 1 
+3^2 + 5
+-}
           
 {- 1.4 
   It would not make a difference. It would save one recursion of the function.
@@ -36,15 +45,6 @@ prime0 n  | n < 1     = error "not a positive integer"
   The type of divides 5 is a function that takes one argument (the ommited argument) and 'produces' a bool
   divides 5 7 :: Bool
   Here all arguments are given, so their types can be resolved. The resulting type is a bool.
--}
-
-{- 1.1
-
-2 * 3 + 1
-2 * (3 + 1)
-1 + 2 - 1 * 3
-4 / 3 * 3 + 1 
-3^2 + 5
 -}
 
 -- 1.9
