@@ -9,10 +9,10 @@ max' x y | x >= y = x
 	     | otherwise = y
 
 -- Exercise 1.10
-removeFst :: Int -> [Int] -> [Int]
-removeFst m [] = []
-removeFst m (x:xs) | x == m = xs
-				   | otherwise = removeFst m xs
+removeFstInt :: Int -> [Int] -> [Int]
+removeFstInt m [] = []
+removeFstInt m (x:xs) | x == m = xs
+				   | otherwise = removeFstInt m xs
 
 removeAll :: Int -> [Int] -> [Int]
 removeAll m [] = []
@@ -31,3 +31,21 @@ blowup' n (x:xs) = replicate n x ++ blowup' (n + 1) xs
 
 blowup :: String -> String
 blowup x = blowup' 1 x
+
+-- Exercise 1.15
+mnmInStr :: [String] -> String
+mnmInStr [] = error "An empty list can't have a minimum value"
+mnmInStr [x] = x
+mnmInStr (x:xs) = min x (mnmInStr xs)
+
+removeFstChar :: String -> [String] -> [String]
+removeFstChar m [] = []
+removeFstChar m (x:xs) | x == m = xs
+				   | otherwise = x : removeFstChar m xs
+
+sortStr :: [String] -> [String]
+sortStr [] = []
+sortStr xs = m : (sortStr (removeFstChar m xs)) where m = mnmInStr xs
+
+
+
