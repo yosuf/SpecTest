@@ -84,9 +84,12 @@ count' a (c:cs) | a == c    = 1 + (count' a cs)
                 | otherwise = (count' a cs)
                 
 -- 1.14
+-- blowup_ :: Int -> String -> String
+-- blowup_ _ [] = []
+-- blowup_ n (c:cs) = (take n (repeat c)) ++ (blowup_ (n+1) cs)
 blowup_ :: Int -> String -> String
 blowup_ _ [] = []
-blowup_ n (c:cs) = (take n (repeat c)) ++ (blowup_ (n+1) cs)
+blowup_ n (c:cs) = (replicate n c) ++ (blowup_ (n+1) cs)
 
 blowup :: String -> String
 blowup x = blowup_ 1 x
