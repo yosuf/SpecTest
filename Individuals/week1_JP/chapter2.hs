@@ -36,4 +36,6 @@ is_contradiction2 f = and [not (f b1 b2) | b1 <- [True, False],
 is_contradiction3 :: (Bool -> Bool -> Bool -> Bool) -> Bool
 is_contradiction3 f = and [not (f b1 b2 b3) | b1 <- [True, False],
                                               b2 <- [True, False],
-                                              b3 <- [True, False]
+                                              b3 <- [True, False]]
+
+-- 2.16
