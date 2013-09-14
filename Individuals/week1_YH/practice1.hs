@@ -92,3 +92,42 @@ endless :: Int -> Int
 endless 0 = 0
 endelss x = 2* endelss x
 
+
+exOr :: Bool -> Bool -> Bool
+exOr p q | p = not q
+	     | q = not p
+ 	     | otherwise = False
+
+
+
+{-- Triangles --}
+
+
+
+triangle :: Integer -> Integer -> Integer -> String
+triangle x y z
+	| x<1 || y<1 || z<1 = "Not applicable"   -- like: 0 1 1
+	| x == y && y == z = "Equilateral"		-- like: 5 5 5 
+	| x == y || x == z || y == z = "Isosceles"  -- like: 2 2 6
+	| (min x y)^2 + (min y z)^2 == (max (max x y) z)^2 = "Right triangle" -- like: 3 4 5
+	| otherwise = "Otherwise" -- like anything else
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
