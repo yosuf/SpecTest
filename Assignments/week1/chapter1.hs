@@ -1,3 +1,7 @@
+import Data.List
+import Data.Maybe
+
+
 -- Given functions
 mnmInt :: [Int] -> Int
 mnmInt [] = error "empty list" 
@@ -54,7 +58,7 @@ maxInt [x] = x
 maxInt (x:xs) = max x (maxInt xs)
 
 -- 1.10
--- Found two solutions, probably the second (removeFst') is the most functional one
+-- Found three solutions, probably the second (removeFst') is the most functional one
            
 removeFst :: Int -> [Int] -> [Int]
 removeFst m [] = []
@@ -64,6 +68,13 @@ removeFst' :: Int -> [Int] -> [Int]
 removeFst' m [] = []
 removeFst' m (x:xs) | m == x = xs
                     | otherwise = x:(removeFst m xs)
+
+removeFst'' :: Int -> [Int] -> [Int]
+removeFst'' m xs  
+    | length xs < 1   = xs
+    | not (elem m xs) = xs
+    | otherwise = (fst (splitAt (fromJust (elemIndex m xs)) xs)) ++ tail (snd (splitAt (fromJust (elemIndex m xs)) xs))
+
                     
 -- 1.11
 srtInts :: [Int] -> [Int]
@@ -171,4 +182,6 @@ sumLengths :: [[a]] -> Int
 sumLengths xs = sum (lengths xs)
 
 -- 1.24
--- !!PLEASE ANYONE ADD SOLUTION HERE!!
+-- Answer: syntax error
+-- ldpf has the type ([Integer] -> Integer -> Integer).
+-- it is not possible to pass only a list as one argument.
