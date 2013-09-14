@@ -83,10 +83,12 @@ aboveFive input
 		where result = input > 5
 
 
-doubleList :: [Int] -> [Int]
-doubleList [] = []
-doubleList (x:input) =  x*2:(iterateList input)
+--doubleList :: [Int] -> [Int]
+--doubleList [] = []
+--doubleList (x:input) =  x*2:(iterateList input)
 
 
-
+endless :: Int -> Int
+endless 0 = 0
+endelss x = 2* endelss x
 
