@@ -1,5 +1,7 @@
 module Sol1YH where
 
+import Data.List
+import Data.Maybe
 import qualified GS
 
 
@@ -32,13 +34,11 @@ max' x y | y > x = y
 		 | otherwise = x 
 
 
-
+-- remove the first occurence of an integer m from a list of ints. if m does not occur in the list, it remains unchanged.
 removeFst :: Int -> [Int] -> [Int]
-removeFst m xs = elem m xs 
-
-	if elem (head input) (tail input) 
-					then tail input
-					else input
+removeFst m xs 	| length xs < 1 	= xs
+				| not (elem m xs)	= xs
+				| otherwise = (fst (splitAt (fromJust (elemIndex m xs)) xs)) ++ tail (snd (splitAt (fromJust (elemIndex m xs)) xs))
 
 
 srtInts' :: [Int] -> [Int]

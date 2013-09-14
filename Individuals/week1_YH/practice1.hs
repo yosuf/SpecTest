@@ -75,6 +75,17 @@ getBmi hight weight = bmiText (weight / hight^2)
 
 
 
+--where test
+aboveFive :: Int -> Bool
+aboveFive input
+		| result == True = True
+		| result == False = False
+		where result = input > 5
+
+
+doubleList :: [Int] -> [Int]
+doubleList [] = []
+doubleList (x:input) =  x*2:(iterateList input)
 
 
 
