@@ -2,11 +2,9 @@ module Lab2
 where
 
 -- Question 1.
---
--- basic algorithm implementation for triangle 
--- This still has to be done according to the assignment.
-
+-- Triangles
 data Shape = NoTriangle | Equilateral | Isosceles | Rectangular | Other deriving (Eq, Show)
+
 triangle :: Integer -> Integer -> Integer -> Shape
 triangle x y z
 	| x<1 || y<1 || z<1 = NoTriangle   -- like: 0 1 1
