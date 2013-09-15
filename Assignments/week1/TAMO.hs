@@ -1,3 +1,4 @@
+
 module TAMO 
 
 where
@@ -5,6 +6,8 @@ where
 -- or use ghci -XFlexibleInstances
 
 infix 1 ==>
+
+
 
 (==>) :: Bool -> Bool -> Bool
 x ==> y = (not x) || y
