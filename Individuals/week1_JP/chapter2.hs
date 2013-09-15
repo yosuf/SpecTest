@@ -39,3 +39,5 @@ is_contradiction3 f = and [not (f b1 b2 b3) | b1 <- [True, False],
                                               b3 <- [True, False]]
 
 -- 2.16
+--?
+
