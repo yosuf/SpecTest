@@ -47,4 +47,6 @@ equiv f1 f2 = tautology (Equiv f1 f2)
   
   Run tautCheck to test with the provided tautologies.
   
+  TimeSpend = +/- 120 mins
+  
 -}
