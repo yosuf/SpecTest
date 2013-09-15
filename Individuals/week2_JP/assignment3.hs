@@ -3,6 +3,7 @@ module Assignment3
 where
 
 import Week2
+import Assignment2
 
 {-
   Conjunctive Normal Form
@@ -34,6 +35,10 @@ testd (Cnj f) = False
 testd f = True
 
 
+testf f = let cnf' = cnf (nnf (arrowfree f))
+          in (equiv f cnf') && test cnf'
+
+-- +(*(*(+(1 2) +(-2 2)) *(+(1 -3) +(-2 -3))) +(-1 3))
 {-
   
   TimeSpend = 120 minutes
