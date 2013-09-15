@@ -14,14 +14,22 @@ ldf k n 	| divides k n	= k
             | k ^ 2 >= n	= n 
             | otherwise   	= ldf ( k + 1 ) n 
 
+{- Ans : doing k ^ 2 >= n doesn't make any difference becuase the first guarded equation will always satisfy prior to moving to the second guraded equation.
+              eg : ldf 4 16 will satisfy first condition and return 4. If we try to apply the given condition then also the program will never reach to the second guarded condition               as the fist one will already be a satisfied one.  -}
 
 {- 1.5 -}
-ld n 	= ldf 2 n    
+ld n 	= ldf 2 n    {- this needs to be placed ; ldf 2 n means the number n which are divisble by 2 -}
 
 prime0 n 	| n < 1	= error "not a positive integer"
 	| n == 1 	= False 
 	| otherwise = ld n == n
 
+{- 1.6  -}
+{- rem :: Integer -> Integer -> Integer -}
+
+{- 1.7 -}
+{-   :t divides 4          return divides 4 :: Integer -> Bool ; This is becuase the first argument as integer is already loaded -}
+{-   :t divides 2 3       returns divides 2 3 :: Bool ; this is because input arguments are already loaded and is expecting for a boolean result -}
 
 
 {- Example 1.8 -}
@@ -40,7 +48,7 @@ mxmInt (x : xs) =  max x (mxmInt xs)
 {- 1.10 -}
 removeFst :: Int -> [Int]   -> [Int]
 removeFst x [] = []
-removeFst  m (x : xs) 	| m == x 	= xs 
+removeFst  m (x : xs) 	| m == x 	= xs {- Only remove first occurence of m -}
 					{-	| m == x 	= removeFst x xs   ; if need to remove all occurence of m -}
 						| otherwise =  x:removeFst m xs
 
@@ -50,7 +58,7 @@ removeFst  m (x : xs) 	| m == x 	= xs
 {-Example 1.11 -}
 strInts :: [Int] -> [Int]
 strInts [] = []
-strInts xs = m : (strInts (removeFst m xs)) where m = minInt xs 
+strInts xs = m : (strInts (removeFst m xs)) where m = minInt xs {- No x:xs as parameter -}
 
 
 {- Example 1.12 -}
@@ -133,23 +141,26 @@ factors n 	| n < 1 	= error "argument not positive"
 {-1.20-}			
 lengths :: [[a]] -> [Int]
 lengths x = map pLength x
+{- lengths [[1],[1,2,3,4],[1,2,3,4,7]]   => [1,4,5]-}
 
 
 {-1.21-}
 sumLengths :: [[Int]] -> [Int]
-sumLengths x = map pSum x  
+sumLengths x = map pSum x   {- pSum is a function for map that takes lists of list ; sumLengths [[1,2],[2,4]] = [3,6]-}
+{- map f (x:xs) = f x : map f xs =>  
+   map pSum [[1,2],[3,4],[5,6]] = pSum [1,2] : map pSum [[3,4],[5,6]] -}
 
 
 {- Filters -}
-pFilter :: (a -> Bool) -> [a] -> [a]    
+pFilter :: (a -> Bool) -> [a] -> [a]    {- filter (>3) [1..5] = ans is [4,5]-}
 pFilter p [] = []
-pFilter p (x:xs) 	| p x 		= x : pFilter p xs  
+pFilter p (x:xs) 	| p x 		= x : pFilter p xs   {- p x : this represents a condition -}
 					| otherwise = pFilter p xs
 
 {- Example 1.23 -}					
 
 ldp :: Integer -> Integer
-
+{-ldp n = ldpf primes1 n    {- ldp 9 has ans 3 ; ldp 5 has 5 -}-}   {- Comment line 173 -}
 
 ldpf :: [Integer] -> Integer -> Integer
 ldpf (p:ps) n 	| rem n p == 0 	= p
