@@ -14,6 +14,9 @@ import Assignment2
 -}
 
 -- precondition: input is in negation normal form
+-- VVZ: not complete, counterexample: "cnf (Neg (Neg p))"
+-- VVZ: another one: "cnf (Cnj [Cnj [p,q], q])"
+-- VVZ: and, of course, this code only ever works on binary disjunction/conjunction
 cnf :: Form -> Form
 cnf (Dsj [p, Cnj [q, r]]) = Cnj[cnf(Dsj [p,q]), cnf(Dsj [p,r])]
 cnf (Dsj [Cnj [p,q], r]) = Cnj[cnf(Dsj [p,r]), cnf(Dsj [q,r])]
@@ -35,6 +38,7 @@ testd (Cnj f) = False
 testd f = True
 
 
+-- VVZ: where do you get test data to run this test function?
 testf f = let cnf' = cnf (nnf (arrowfree f))
           in (equiv f cnf') && test cnf'
 

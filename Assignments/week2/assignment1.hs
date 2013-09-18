@@ -18,6 +18,7 @@ triangle x y z = triangle' (sort [x,y,z] )
 -- pre-condition: Sorted list of integers which has max 3 elements. 
 triangle' :: [Integer] -> Shape
 triangle' (x:y:z:rest)
+-- VVZ: what is the incentive to check this but not check for less than 3 elements?
   | length rest /= 0 = NoTriangle
   | x<0 || y<0 || z<0 = NoTriangle
   | x + y <= z = NoTriangle

@@ -5,9 +5,13 @@ where
 import Week2
 
 contradiction :: Form -> Bool
+-- VVZ: correct, but a shorter notation would be "contradiction = not . satisfiable"
 contradiction f = not (satisfiable f)
 
 tautology :: Form -> Bool
+-- VVZ: almost cheating ;)
+-- VVZ: a standalone version would look like this:
+-- VVZ: tautology f = all (\ v -> eval v f) (allVals f)
 tautology f = contradiction (Neg f)
 
 -- http://www.millersville.edu/~bikenaga/math-proof/truth-tables/truth-tables.html
@@ -23,6 +27,7 @@ entails :: Form -> Form -> Bool
 entails f1 f2 = tautology (Impl f1 f2)
 
 equiv :: Form -> Form -> Bool
+-- VVZ: correct, but could also be "entails f1 f2 && entails f2 f1"
 equiv f1 f2 = tautology (Equiv f1 f2)
 
 {-

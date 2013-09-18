@@ -10,6 +10,7 @@ mnmInt (x:xs) = min x (mnmInt xs)
 
 prefix :: String -> String -> Bool
 prefix [] ys = True
+-- VVZ: slightly excessive to write "x:xs", since the patterns are matched in the order they are written, so the first argument won't be empty
 prefix (x:xs) [] = False
 prefix (x:xs) (y:ys) = (x==y) && prefix xs ys
 
@@ -175,10 +176,12 @@ substring xs ys | prefix xs ys        = True
 
 -- 1.20
 lengths :: [[a]] -> [Int]
+-- VVZ: could be written simpler: "lengths = map length"
 lengths xs = map length xs
 
 -- 1.21
 sumLengths :: [[a]] -> Int
+-- VVZ: could be written simpler: "sumLengths' = sum . lengths"
 sumLengths xs = sum (lengths xs)
 
 -- 1.24
