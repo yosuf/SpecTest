@@ -84,6 +84,9 @@ srtInts xs = m : (srtInts (removeFst m xs)) where m = mnmInt xs
 
 -- 1.13
 -- Again two solutions. Solution 2 (count') is probably most readable
+-- VVZ: how about a third one:
+-- VVZ: "count c = length . filter (== c)"
+-- VVZ: isn't this even more readable?
 count :: Char -> String -> Int
 count a [] = 0
 count a (c:cs) = let 
