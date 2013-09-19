@@ -14,7 +14,7 @@ pSum x y = (x ^ 2 + y ^ 2)
 
 triangle :: Integer -> Integer -> Integer -> Shape
 triangle x y z = if ( (x + y < z) || (x + z < y) || (y + z) < x ) then NoTriangle
-	             else if (x == y && x == z && y == z) then Equilateral
+	             else if (x == y && x == z) then Equilateral
 	             else if ( x == y || x == z || y == z) then Isosceles
 	             else if ((pSum x y == z ^ 2 ) || (pSum x z == y ^ 2 ) || ( pSum y z == x ^ 2)) then Rectangular
 	             else Other
@@ -32,4 +32,16 @@ Indication of time spent : around 3 hours
 
 
 {- 2 -}
-contradiction :: Form -> Bool
+contradiction :: Form -> Bool 
+contradiction f = not (satisfiable f)
+
+tautology :: Form -> Bool
+tautology f = not (contradiction f)
+
+entails :: Form -> Form -> Bool  {- Logical entailment -}
+entails f1 f2 = tautology ( Impl f1 f2)
+
+equiv :: Form -> Form -> Bool {- Logical Equivalence -}
+equiv f1 f2 = tautology ( Equiv f1 f2)
+
+

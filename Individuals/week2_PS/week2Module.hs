@@ -111,7 +111,7 @@ propNames = sort.nub.pnames where
   pnames (Equiv f1 f2) = 
           concat (map pnames [f1,f2])
 
-type Valuation = [(Name,Bool)]
+type Valuation = [(Name,Bool)]     {- ps: Valuation [(1, True), [2, False]]-}
 
 -- all possible valuations for list of prop letters
 genVals :: [Name] -> [Valuation]
@@ -120,9 +120,27 @@ genVals (name:names) =
   map ((name,True) :) (genVals names)
   ++ map ((name,False):) (genVals names)
 
+{- ps: 
+  genVals [1]  : [[(1,True)],[(1,False)]] 
+  genVals [1,2] : [[(1,True),(2,True)], 
+                   [(1,True),(2,False)],
+                   [(1,False),(2,True)],
+                   [(1,False),(1,False)]
+                  ]
+-}
+
 -- generate all possible valuations for a formula
 allVals :: Form -> [Valuation]
 allVals = genVals . propNames
+
+{- ps:
+ allVals (Prop 1) : [[(1,True)],[(2,False)]]
+ allVals Dsj([Prop 1 , Prop 2]) :[ [(1,True),(2,True)],
+                                   [(1,True),(2,False)],
+                                   [(1,False),(2,True)],
+                                   [(1,False),(2,False)]
+                                 ]
+-}
 
 eval :: Valuation -> Form -> Bool
 eval [] (Prop c)    = error ("no info: " ++ show c)
@@ -136,8 +154,23 @@ eval xs (Impl f1 f2) =
      not (eval xs f1) || eval xs f2
 eval xs (Equiv f1 f2) = eval xs f1 == eval xs f2
 
+
+{- ps:
+  eval [(1,True),(2,True)] (Cnj [Prop 1 , Prop 2]) : True
+  eval [(1,True),(2,False)] (Cnj [Prop 1 , Prop 2]) : False
+-}
+
+
+
+
 satisfiable :: Form -> Bool
 satisfiable f = any (\ v -> eval v f) (allVals f)
+
+
+{- ps: example to check this is : 
+satifiable (Dsj [Prop 1 , Prop 2]) -}
+
+
 
 -- no precondition: should work for any formula. 
 arrowfree :: Form -> Form 

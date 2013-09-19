@@ -25,6 +25,8 @@ x <+> y = x /= y
 p = True
 q = False
 
+
+
 formula1 = (not p) && (p ==> q) <=> not (q && (not p))
 
 formula2 p q = ((not p) && (p ==> q) <=> not (q && (not p)))
@@ -118,6 +120,22 @@ test9a = lequiv (\ p q r -> p && (q || r))
                 (\ p q r -> (p && q) || (p && r))
 test9b = lequiv (\ p q r ->  p || (q && r)) 
                 (\ p q r -> (p || q) && (p || r))
+
+t = True
+f = False 
+
+test2121a = lequiv id ( \ f -> not t)
+test2121b = lequiv id ( \ t -> not f)
+test2122  = lequiv ( \ p f -> p ==> f)  (\ id p -> not p)
+test2123a = lequiv ( \ p t -> p || t ) ( \ id t -> t)
+test2123b = lequiv ( \ p f -> p && f) (\ id f -> f)
+test2124a = lequiv ( \ p f -> p || f) ( \ id p -> p)
+test2124b = lequiv ( \ p t -> p && t ) ( \ id p -> p)
+test2125  = lequiv id ( \ t -> p || not p)
+test2126  = lequiv id ( \ f -> p && (not p))
+
+
+
 
 square1 :: Integer -> Integer
 square1 x = x^2 
