@@ -111,6 +111,10 @@ getRandomForms d n = do
                      fs <- getRandomForms d (n-1) 
                      return (f:fs)
 
+
+
+
+
 test :: Int -> (Form -> Bool) -> [Form] -> IO ()
 test n _ [] = print (show n ++ " tests passed")
 test n p (f:fs) = 
