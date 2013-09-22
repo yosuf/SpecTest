@@ -3,7 +3,7 @@ module Techniques where
 import Data.List
 import Data.Char
 import System.Random
-import Week2
+import Week2Module  {- ps: this was originally Week2 but since updated it becuase Week2 from Jan has been updated to Week2Module -}
 
 data Token 
       = TokenNeg
@@ -29,8 +29,10 @@ lexer ('=':'=':'>':cs) = TokenImpl : lexer cs
 lexer ('<':'=':'>':cs) = TokenEquiv : lexer cs
 lexer (x:_) = error ("unknown token: " ++ [x])
 
-lexNum cs = TokenInt (read num) : lexer rest
-     where (num,rest) = span isDigit cs
+lexNum cs = TokenInt (read num) : lexer rest where (num,rest) = span isDigit cs
+
+
+
 
 type Parser a b = [a] -> [(b,[a])]
 
@@ -39,18 +41,14 @@ succeed x xs = [(x,xs)]
 
 parseForm :: Parser Token Form 
 parseForm (TokenInt x: tokens) = [(Prop x,tokens)]
-parseForm (TokenNeg : tokens) =
-  [ (Neg f, rest) | (f,rest) <- parseForm tokens ]
-parseForm (TokenCnj : TokenOP : tokens) = 
-  [ (Cnj fs, rest) | (fs,rest) <- parseForms tokens ]
-parseForm (TokenDsj : TokenOP : tokens) = 
-  [ (Dsj fs, rest) | (fs,rest) <- parseForms tokens ]
-parseForm (TokenOP : tokens) = 
-    [ (Impl f1 f2, rest) | (f1,ys) <- parseForm tokens,
-                           (f2,rest) <- parseImpl ys ]
-     ++
-    [ (Equiv f1 f2, rest) | (f1,ys) <- parseForm tokens,
-                            (f2,rest) <- parseEquiv ys ] 
+parseForm (TokenNeg : tokens) =  [ (Neg f, rest) | (f,rest) <- parseForm tokens ]
+parseForm (TokenCnj : TokenOP : tokens) =   [ (Cnj fs, rest) | (fs,rest) <- parseForms tokens ]
+parseForm (TokenDsj : TokenOP : tokens) =   [ (Dsj fs, rest) | (fs,rest) <- parseForms tokens ]
+parseForm (TokenOP : tokens) =  [ (Impl f1 f2, rest) | (f1,ys) <- parseForm tokens,
+                                    (f2,rest) <- parseImpl ys ]
+                                ++
+                                [ (Equiv f1 f2, rest) | (f1,ys) <- parseForm tokens,
+                                  (f2,rest) <- parseEquiv ys ] 
 parseForm tokens = []
 
 parseForms :: Parser Token [Form] 
@@ -73,6 +71,10 @@ parseEquiv tokens = []
 
 parse :: String -> [Form]
 parse s = [ f | (f,_) <- parseForm (lexer s) ]
+
+
+
+
 
 getRandomInt :: Int -> IO Int
 getRandomInt n = getStdRandom (randomR (0,n))
@@ -126,3 +128,5 @@ testParser :: IO ()
 testParser = testForms 100
    (\ f -> let [g] = parse (show f) in 
            show f == show g)
+
+
