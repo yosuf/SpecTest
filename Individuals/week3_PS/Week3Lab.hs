@@ -22,6 +22,16 @@ genIntListFs n = do f  <- getRandomInt n
 
 {- 4 Compare Permutation and generate True if arguments are permutations of each other -}
 
+{-
+If both strings consist of one identical character, return true
+Otherwise:
+remove one character from the first string
+Look through second string for occurrence of this character
+If not present, return false
+Otherwise, remove said character and apply algorithm recursively to the remainders of both strings.
+-}
+
+
 isPermutation :: Eq a => [a] => [a] -> Bool   {- isPermutation [2,1,3] [1,2,3] : Reuslt is True-}
 isPermutation [] [] = True
 isPermutation (x:xs) ys | (length (x:xs) /= length ys) = error "List parameters not equal "
@@ -34,3 +44,8 @@ delArgInList p [] = []
 delArgInList p (x:xs) | p x      = xs
                     | otherwise = x : delArgInList p xs
 
+
+
+
+
+  
