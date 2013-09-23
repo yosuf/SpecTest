@@ -76,6 +76,15 @@ parse s = [ f | (f,_) <- parseForm (lexer s) ]
 
 
 
+testPs :: [Integer] -> String
+testPs n = do c <- n
+              case c of 
+               1 -> "a"
+               2 -> "b"
+
+{- ps: c <- n where n should be of type [Integer] and not Integer. This is becuase a list is assigned to it and not a singleton
+value. Same goes below with comment {- ps: [List]-}  -}
+
 getRandomInt :: Int -> IO Int
 getRandomInt n = getStdRandom (randomR (0,n))
 
@@ -84,13 +93,13 @@ getRandomF = do d <- getRandomInt 4
                 getRandomForm d
             
 getRandomForm :: Int -> IO Form 
-getRandomForm 0 = do m <- getRandomInt 20
+getRandomForm 0 = do m <- getRandomInt 20    {- ps: [List]-}
                      return (Prop (m+1))
 
-getRandomForm d = do n <- getRandomInt 3
+getRandomForm d = do n <- getRandomInt 3    {- ps: [List]-}
                      case n of 
                        0 -> do m <- getRandomInt 20
-                               return (Prop (m+1))
+                               return (Prop (m+1))  
                        1 -> do f <- getRandomForm (d-1)
                                return (Neg f) 
                        2 -> do m  <- getRandomInt 5 
@@ -113,8 +122,6 @@ getRandomForms d n = do
 
 
 
-
-
 test :: Int -> (Form -> Bool) -> [Form] -> IO ()
 test n _ [] = print (show n ++ " tests passed")
 test n p (f:fs) = 
@@ -129,7 +136,7 @@ testForms n prop = do
   test n prop fs
 
 testParser :: IO ()
-testParser = testForms 100
+testParser = testForms 5
    (\ f -> let [g] = parse (show f) in 
            show f == show g)
 
