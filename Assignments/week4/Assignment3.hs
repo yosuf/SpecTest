@@ -6,6 +6,7 @@ import System.Random
 import Data.List
 import SetOrd
 import Week4
+import Assignment2
 
 -- automatic random test Start --------------------------------------------------------------
 -- it can be used as: autoRandomTest numberOfTests randomSetTest numberOfGeneratedSets
