@@ -1,4 +1,4 @@
-module GS 
+ GS 
 
 where 
 
