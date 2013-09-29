@@ -2,6 +2,8 @@ module Assignment4 where
 
 import Data.List
 
+{- Please look below for assignment 5-}
+
 {-  Assignment: A permutation of a finite list is another finite list with the same elements, but possibly in a different order.
 For example, [0,2,0] is a
 permutation of [0,0,2], but [2,2,0] is not. Write a function
@@ -10,10 +12,9 @@ that returns True if its arguments are permutations of each other.-}
 
 {- Note: There are multiple variations of this assignment. All of them are noted below -}
 
-{-  Yosuf Haydary
-Assignment 4
-Time taken: 3 hours -}
 
+
+{-  Yosuf Haydary. Time taken: 3 hours -}
 -- The returned list should only contain True.
 testIsPermutation ::[ Bool ]
 testIsPermutation = [	isPermutation (delete 1 [1]) (delete 1 [1]), 
@@ -86,3 +87,17 @@ removeAll (y:ys) xs = removeAll ys (removeFst y xs)
 removeFst _ [] = []
 removeFst y (x:xs)  | y == x = xs
                     | otherwise = x:(removeFst y xs)
+
+
+
+{- Assignment 5:
+Define some testable properties for this function, and use your random
+generator for integer lists from Exercise 3 to test isPermutation.-}
+
+
+
+
+
+
+
+
