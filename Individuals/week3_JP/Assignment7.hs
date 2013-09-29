@@ -3,16 +3,7 @@ module Assignment7 where
 import Week3
 import Assignment3
 
--- rename getRandomInt'' from Assignment3
-getRandomInt = getRandomInt''
-
 --type Name = String
-{-- 
-  Assignment 7: Implement Random formula generator for first order logic
-  
-  Run: getRndFormula
---}
-
 getRandomName :: IO Name
 getRandomName = do n <- getRandomInt 2
                    return (["x", "y", "z"] !! n)          

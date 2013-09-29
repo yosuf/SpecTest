@@ -23,8 +23,8 @@ genIntListFs n = do f  <- getRandomInt n
 
 
 {-Demi-}
-getRandomInt :: Int -> IO Int
-getRandomInt n = getStdRandom (randomR (0,n))
+getRandomInt' :: Int -> IO Int
+getRandomInt' n = getStdRandom (randomR (0,n))
 
 genIntList' :: Int -> Int -> IO [Int]
 genIntList' _ 0 = return []
@@ -37,11 +37,11 @@ genIntList'' :: IO [Int]
 genIntList'' = genIntList' 100 20
 
 {-Jeroen-}
-getRandomInt :: Int -> IO Int
-getRandomInt n = getStdRandom (randomR (0,n))
+getRandomInt'' :: Int -> IO Int
+getRandomInt'' n = getStdRandom (randomR (0,n))
 
-genIntList :: IO [Int]
-genIntList =  getStdRandom rndListGen
+genIntList''' :: IO [Int]
+genIntList''' =  getStdRandom rndListGen
 
 rndListGen :: StdGen -> ([Int], StdGen)
 rndListGen gen = (rndList gen, snd(next gen))

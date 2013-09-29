@@ -1,10 +1,7 @@
 module Assignment6 where
 
-import Week2Module
+import Week2
 import Assignment3
-
--- rename getRandomInt'' from Assignment3
-getRandomInt = getRandomInt''
 
 getRandomF :: IO Form
 getRandomF = do d <- getRandomInt 4
@@ -97,7 +94,6 @@ testCnf = testForms 1000 (\f -> let f' = (cnf (nnf (arrowfree f))) in (equiv f f
   However, testCnf needs to run several times before it discovers non-CNF functions.
   
 --}
-
-
-
-
+                      
+--testParser :: IO ()
+--testParser = testForms 100 (\ f -> let [g] = parse (show f) in show f == show g)

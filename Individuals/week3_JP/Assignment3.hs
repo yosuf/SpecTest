@@ -1,9 +1,7 @@
 module Assignment3 where
 
-import System.IO.Unsafe  -- be careful!
 import System.Random
 import Data.List
-
 
 getRandomInt :: Int -> IO Int
 getRandomInt n = getStdRandom (randomR (0,n))
@@ -21,28 +19,20 @@ isPermutation [] []     = True
 isPermutation ys xs     | length ys /= length xs        = False
                         | (length.removeAll ys) xs == 0 = True
                         | otherwise = False
-
 removeAll [] xs = xs
-removeAll (y:ys) xs = removeAll ys (removeFst y xs)
-                        
-removeFst _ [] = []
-removeFst y (x:xs)  | y == x = xs
-                    | otherwise = x:(removeFst y xs)
-                    
+removeAll (y:ys) xs = removeAll ys (delete y xs)
 
---shuffle xs =  let x = xs !! (unsafePerformIO (getRandomInt ((length xs) -1)))+1
---              in x : (removeFst x xs)
+testIsPermutation :: ([Bool] -> Bool) -> ([[Int] -> [Int]]) -> (IO Bool)
+testIsPermutation _ [] = fail "Provide transformational list functions"
+testIsPermutation t fs = do l <- genIntList
+                            let lcap = take 100 l
+                            let y = t [ isPermutation lcap (f lcap) | f <- fs ]
+                            return y
 
-testPermRev :: [Int] -> [Int]
-testPermRev xs = if isPermutation xs (reverse (xs)) /= True then error "not Perm" else xs
-  
-    
-testIsPermutation = 
-  do
-    putStrLn "Testing IsPermutation..."
-    
-    x <- genIntList
-    let x1 = take 10 x
-    let t1 = testPermRev x1
-    --isPermutation rndList' rndList'
-    putStrLn "Ready!"
+duplicate fs = fs ++ fs
+                            
+testAll = do
+            t1 <- testIsPermutation and [reverse, sort]
+            t2 <-  testIsPermutation (not.or) [duplicate]
+            let t = t1 && t2
+            return t
