@@ -1,19 +1,58 @@
 module Assignment4 where
 
-import System.IO.Unsafe  -- be careful!
 import Data.List
-import System.Random
-import Data.Char
-import Techniques
 
-
-
-{- Assignment 4 Compare Permutation and generate True if arguments are permutations of each other-}
-
-{- Yosuf: Time taken: 1hr -}
+{-  Assignment: A permutation of a finite list is another finite list with the same elements, but possibly in a different order.
+For example, [0,2,0] is a
+permutation of [0,0,2], but [2,2,0] is not. Write a function
 isPermutation :: Eq a => [a] -> [a] -> Bool
-isPermutation xs xy = if (length xs) /= (length xy) then  False 
-	                  else and [and [elem s xy, elem y xs] | s <- xs, y <- xy ]
+that returns True if its arguments are permutations of each other.-}
+
+{- Note: There are multiple variations of this assignment. All of them are noted below -}
+
+{-  Yosuf Haydary
+Assignment 4
+Time taken: 3 hours -}
+
+-- The returned list should only contain True.
+testIsPermutation ::[ Bool ]
+testIsPermutation = [	isPermutation (delete 1 [1]) (delete 1 [1]), 
+						isPermutation [1] [1] ,
+						isPermutation [2,2] [2,2], 
+						isPermutation [0,2,0] [0,0,2], -- Example from the lab assignment
+						isPermutation [3,3,3] [3,3,3],
+						isPermutation [5,5,5,5,5] [5,5,5,5,5], 
+						isPermutation [0..10] [10, 9,8,7,6,5,4,3,2,1,0] 
+					]
+						
+-- The returned list should only contain False.
+testIsNotPermutation :: [ Bool ]
+testIsNotPermutation =  [ 	isPermutation [] [0], 
+							isPermutation [1] [1,2],
+							isPermutation (delete 1 [1]) [1], 
+							isPermutation [0,2,0] [2,2,0], -- Example from the lab
+							isPermutation [1,2,2,3,3,3,4,4,4,4] [4,4,4,4,3,3,3,2,1,1],
+							isPermutation [0..10] [1..11] 
+						]
+
+
+isPermutation :: Eq a => [a] -> [a] -> Bool
+isPermutation xs xy	| (length xs) /= (length xy) = False
+					| otherwise = and [ count s xs == count s xy | s <- xs ]
+
+
+-- returns the number of a present in the given list
+-- Example count 1 [1,1,0,0] will return 2
+count :: Eq a => a -> [a] -> Integer
+count a [] = 0
+count a (x:rest) = if a == x then 1+(count a rest) else (count a rest)
+
+-- This method should return a list containing only True
+-- Otherwise the count method is faulty
+testCount :: [Bool]
+testCount = [ 	0 == count 1 [], 
+				1 == count 2 [9,2,3],
+				4 == count 0 [9,0,3,0,5,0,1,0] ]	
 
 
 {-Demi-}
@@ -34,10 +73,10 @@ delArgInList p [] = []
 delArgInList p (x:xs) | p x      = xs
                     | otherwise = x : delArgInList p xs
 
-{-Jeroenn-}
-isPermutation :: Eq a => [a] -> [a] -> Bool
-isPermutation [] []     = True
-isPermutation ys xs     | length ys /= length xs        = False
+{-Jeroen-}
+isPermutation'''' :: Eq a => [a] -> [a] -> Bool
+isPermutation'''' [] []     = True
+isPermutation'''' ys xs     | length ys /= length xs        = False
                         | (length.removeAll ys) xs == 0 = True
                         | otherwise = False
 
