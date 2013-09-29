@@ -76,8 +76,8 @@ createIntersection (x:xs) s | elem x s = x : createIntersection xs s
 
 -- intersectionSet End -------------------------------------------------
 
-
--- set difference						
+-- diffSet Start ----------------------------------------------
+-- diffSet						
 diffSet :: (Ord a) => Set a -> Set a -> Set a
 diffSet (Set []) set2  =  emptySet
 diffSet (Set (x:xs)) set2 | inSet x sortedSet = diffSet (Set xs) set2
@@ -98,7 +98,7 @@ createDifferenceList [] s = []
 createDifferenceList (x:xs) s | elem x s = createDifferenceList xs s
 								 | otherwise = x : createDifferenceList xs s
 							 
-							 
+-- diffSet End ----------------------------------------------		 
 -- aux functions--------------------------------
 sortSet :: (Ord a) => Set a -> Set a
 sortSet (Set []) = emptySet
