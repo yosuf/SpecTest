@@ -7,7 +7,7 @@ import Data.List
 import SetOrd
 import Week4
 
--- Assignment 1 ---------------------------------------------				
+-- Assignment 2 ---------------------------------------------				
 randomIntSetGen :: Int -> Set Int
 randomIntSetGen l = list2set (take l $ randoms (mkStdGen 1000) :: [Int])
 

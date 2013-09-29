@@ -12,6 +12,7 @@ newtype Set a = Set [a] deriving (Eq,Ord)
 instance (Show a) => Show (Set a) where
     showsPrec _ (Set s) str = showSet s str
 
+
 showSet []     str = showString "{}" str
 showSet (x:xs) str = showChar '{' ( shows x ( showl xs str))
      where showl []     str = showChar '}' str

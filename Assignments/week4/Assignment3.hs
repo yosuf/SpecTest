@@ -1,4 +1,4 @@
-module Wk4Assignments
+module Assignment3
 
 where
 
@@ -7,25 +7,7 @@ import Data.List
 import SetOrd
 import Week4
 
--- Assignment 2 ---------------------------------------------				
-randomIntSetGen :: Int -> Set Int
-randomIntSetGen l = list2set (take l $ randoms (mkStdGen 10) :: [Int])
-
-setCount :: Set a -> Int
-setCount (Set []) = 0
-setCount (Set (x:xs)) = 1 + setCount(Set xs)
-
-testSetCount :: Bool
-testSetCount = setCount xs == 3
-			   where xs = Set [2,5,7]
-
-testRandomIntSetGen :: Int -> Bool
-testRandomIntSetGen l = (setCount (randomIntSetGen l)) == l
--------------------------------------------------------------
-
--- Assignment 3 -------------------------------------------------------------------------
-
--- automatic random test ------------------------------
+-- automatic random test Start --------------------------------------------------------------
 -- it can be used as: autoRandomTest numberOfTests randomSetTest numberOfGeneratedSets
 -- it generates a list of all test results
 -- Example: autoRandomTestUnionSet 5 randomUnionSetTest 7
@@ -33,8 +15,10 @@ autoRandomTest :: Int -> (Int -> Bool) -> Int -> [Bool]
 autoRandomTest n f m | n <= 0 = []
 						   | otherwise = let n' = n - 1 
                              in ((f m) : (autoRandomTest n' f m))
+-- automatic random test End ----------------------------------------------------------------
 
--- UnionSet Start ----------------------------------------------
+
+-- UnionSet Start ---------------------------------------------------------------------------
 {-  unionSet is already implemented in SetOrd.hs!! ;) 
 	unionSet :: (Ord a) => Set a -> Set a -> Set a 
 	unionSet (Set [])     set2  =  set2
@@ -49,9 +33,10 @@ randomUnionSetTest n = let
 
 testUnionSet :: (Ord a) => Set a -> Set a -> Set a -> Bool
 testUnionSet set1 set2 unSet = (unionSet set1 set2) == unSet
--- UnionSet End ------------------------------------------------
+-- UnionSet End ------------------------------------------------------------------------------
 
--- intersectionSet Start ----------------------------------------------
+
+-- intersectionSet Start ---------------------------------------------------------------------
 -- intersectionSet
 intersectSet :: (Ord a) => Set a -> Set a -> Set a
 intersectSet (Set []) set2 = Set []
@@ -74,10 +59,11 @@ createIntersection [] s = []
 createIntersection (x:xs) s | elem x s = x : createIntersection xs s
 								 | otherwise = createIntersection xs s
 
--- intersectionSet End -------------------------------------------------
+-- intersectionSet End -------------------------------------------------------------------------
 
 
--- set difference						
+-- diffSet Start -------------------------------------------------------------------------------
+-- diffSet						
 diffSet :: (Ord a) => Set a -> Set a -> Set a
 diffSet (Set []) set2  =  emptySet
 diffSet (Set (x:xs)) set2 | inSet x sortedSet = diffSet (Set xs) set2
@@ -98,7 +84,9 @@ createDifferenceList [] s = []
 createDifferenceList (x:xs) s | elem x s = createDifferenceList xs s
 								 | otherwise = x : createDifferenceList xs s
 							 
-							 
+-- diffSet End -----------------------------------------------------------------------------------
+
+		 
 -- aux functions--------------------------------
 sortSet :: (Ord a) => Set a -> Set a
 sortSet (Set []) = emptySet
@@ -110,7 +98,3 @@ set2list (Set (x:xs)) = (x:xs)
 
 -------------------------------------------------
            
-
---------------------------------------------------------------
-
-					  
