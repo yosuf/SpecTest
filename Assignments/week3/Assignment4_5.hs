@@ -1,6 +1,7 @@
-module Assignment4 where
+module Assignment4_5 where
 
 import Data.List
+import Assignment3
 
 {- Please look below for assignment 5-}
 
@@ -94,7 +95,11 @@ testIsNotPermutation =  [ 	isPermutation [] [0],
 						]
 
 
-
+testRandomPermutation :: IO ()
+testRandomPermutation = do
+		list1 <- genIntList''
+		list2 <- genIntList''
+		putStrLn $ "list1 list2 " ++ show (isPermutation list1 list2) ++ " reverse list1: " ++ show (isPermutation list1 (reverse list1)) ++ " reverse list2: " ++ show (isPermutation list2 (reverse list2))
 
 
 
