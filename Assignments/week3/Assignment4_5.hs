@@ -102,5 +102,18 @@ testRandomPermutation = do
 		putStrLn $ "list1 list2 " ++ show (isPermutation list1 list2) ++ " reverse list1: " ++ show (isPermutation list1 (reverse list1)) ++ " reverse list2: " ++ show (isPermutation list2 (reverse list2))
 
 
-
+-- Jeroen
+testIsPermutation' :: ([Bool] -> Bool) -> ([[Int] -> [Int]]) -> (IO Bool)
+testIsPermutation' _ [] = fail "Provide transformational list functions"
+testIsPermutation' t fs = do  l <- genIntList
+                              let lcap = take 100 l
+                              let y = t [ isPermutation lcap (f lcap) | f <- fs ]
+                              return y
+duplicate fs = fs ++ fs
+                            
+testAll = do
+            t1 <- testIsPermutation' and [reverse, sort]
+            t2 <-  testIsPermutation' (not.or) [duplicate]
+            let t = t1 && t2
+            return t
 
