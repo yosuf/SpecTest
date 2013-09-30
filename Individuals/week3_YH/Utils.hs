@@ -12,3 +12,9 @@ testCount :: [Bool]
 testCount = [ 	0 == count 1 [], 
 				1 == count 2 [9,2,3],
 				4 == count 0 [9,0,3,0,5,0,1,0] ]
+
+
+
+removeDuplicates:: Eq a => [a] -> [a]
+removeDuplicates [] = []
+removeDuplicates (x:xx) = if elem x xx then removeDuplicates xx else x:(removeDuplicates xx)
