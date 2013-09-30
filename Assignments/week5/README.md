@@ -4,9 +4,9 @@ Week 5 Assignment
 Who is busy with what?
 
 - [ ] Assignment 1: 
-- [ ] Assignment 2: 
+- [x] Assignment 2: Khosrow, And who else?
 - [ ] Assignment 3: 
-- [ ] Assignment 4:  
+- [x] Assignment 4:  Dimas, And Who else?
 - [ ] Assignment 5: 
 
  
