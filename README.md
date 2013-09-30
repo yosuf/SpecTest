@@ -16,6 +16,13 @@ Group participants:
 - Jeroen Peeters
 - Dimas Hifniasyah
 
+Assignments
+===========
+To ease the communication and keep track of work and balance the load, there is a README in each week folder.
+Please mention your name if you are busy with any of the assignments and update the repo. 
+
+That we, we can first begin with assignments which are not done yet and then continue to do our own implementation.
+
 Folders
 =======
 Assignments: Contains the weekly group assignments which should be delivered.
