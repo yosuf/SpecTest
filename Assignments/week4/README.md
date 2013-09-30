@@ -3,7 +3,7 @@ Week 4 Assignment
 
 
 - [ ] Assignment 1: 
-- [x] Assignment 2: Khosrow,
+- [x] Assignment 2: Khosrow, Yosuf
 - [ ] Assignment 3: 
 - [x] Assignment 4: Dimas, 
 - [ ] Assignment 5: 
