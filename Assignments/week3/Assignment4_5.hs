@@ -73,6 +73,8 @@ removeFst y (x:xs)  | y == x = xs
 Define some testable properties for this function, and use your random
 generator for integer lists from Exercise 3 to test isPermutation.-}
 
+{-- Time taken: 6 hours because of IO--}
+
 -- The returned list should only contain True.
 testIsPermutation ::[ Bool ]
 testIsPermutation = [	isPermutation (delete 1 [1]) (delete 1 [1]), 

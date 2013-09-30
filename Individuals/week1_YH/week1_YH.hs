@@ -1,4 +1,5 @@
-module wee1_YH where 
+module Week1_YH where 
+
 	
 {-  Includes lots of practice material -}
 
@@ -105,15 +106,22 @@ exOr p q | p = not q
 
 
 
+data MyType = Type1 | Type2 deriving (Show, Eq)
+
+getType :: Int -> MyType
+getType x = if x==0 then Type1 else Type2
 
 
-
-
-
-
-
-
-
+name :: IO ()
+name = putStr "What is your first name? " >>
+       getLine >>= f
+       where
+       f first = putStr "And your last name? " >>
+                 getLine >>= g
+                 where
+                 g last = putStrLn ("Pleased to meet you, "++full++"!")
+                          where
+                          full = first++" "++last
 
 
 
