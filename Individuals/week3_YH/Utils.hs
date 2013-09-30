@@ -18,3 +18,8 @@ testCount = [ 	0 == count 1 [],
 removeDuplicates:: Eq a => [a] -> [a]
 removeDuplicates [] = []
 removeDuplicates (x:xx) = if elem x xx then removeDuplicates xx else x:(removeDuplicates xx)
+
+
+assert :: Bool -> String
+assert False = error "Assertion Failed"
+assert _	 = "Assertion succeeded."
