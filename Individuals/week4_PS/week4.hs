@@ -94,7 +94,7 @@ Transitive Closure :
   trClos [(1,2),(2,3),(3,4)]   =>   [(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)] : trClos is either itself or to the pair
 
 -}
-{-
+
 type Rel a = [(a,a)]
 
 infixr 5 @@
@@ -102,7 +102,8 @@ infixr 5 @@
 r @@ s = nub [(x,z) | (x,y) <- r , (w,z) <- s , y == w]
 
 trClos :: Ord a => Rel a -> Rel a
+trClos [] = []
+trClos(x:xs) = ([x] ++ ([x] @@ (trClos xs))) ++ (trClos xs)
 
--}
 
 
