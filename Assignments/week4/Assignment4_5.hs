@@ -1,6 +1,7 @@
 module Assignment4_5 where
 
 import Data.List
+import Utils
 
 {-Assignment 4
 Suppose we implement binary relations as list of pairs, Haskell type [(a,a)].
@@ -30,14 +31,26 @@ r @@ s = nub [(x,z) | (x,y) <- r , (w,z) <- s , y == w]
 
 trClos :: Ord a => Rel a -> Rel a
 trClos [] = []
-trClos(x:xs) = ([x] ++ ([x] @@ (trClos xs))) ++ (trClos xs)
+trClos(x:xs) = nub $ ([x] ++ ([x] @@ (trClos xs))) ++ (trClos xs)
 
 
 {- Assignment 5
 Test the function trClos from the previous exercise. Devise your own
-test method for this. Try to use random test generation. Dene reasonable properties to test.
+test method for this. Try to use random test generation. Define reasonable properties to test.
 (Deliverables: test code, short test report, indication of time spent.)
 -}
 
+--Example given in the Assignment
+testTrClose':: IO ()
+testTrClose' = putStrLn $ show $ assertTrue (trClos [(1,2),(2,3),(3,4)] == [(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)] )
+
+testTrClose'' :: IO ()
+testTrClose'' = do -- These two should exactly be the same since the x sets are included always in y
+	putStrLn $ show $ assertTrue (trClos [(x,y) | x <- [1..5] , y <- [1..4] ] == [(x,y) | x <- [1..5] , y<-[1..4]] )
+
+testTrClose :: Int -> Int -> IO ()
+testTrClose a b = if a < 0 || b < 0 then error "Only positive numbers allowed" 
+	else do
+	putStrLn $ show $ assertTrue ( (length $ trClos [(x,y) | x <- [1..a] , y <- [1..b] ]) == a*b )
 
 

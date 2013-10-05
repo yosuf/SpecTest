@@ -7,12 +7,12 @@ import System.Random
 
 -- While testing, this assert could be used to check for failures in a readable mode
 assertTrue :: Bool -> String
-assertTrue False = error "Assertion to be True failed."
-assertTrue _	 = "Assertion to be True succeeded."
+assertTrue False = error "True assert failed."
+assertTrue _	 = "True assert succeeded."
 
 assertFalse :: Bool -> String
-assertFalse True = error "Assertion to be False failed."
-assertFalse _	 = "Assertion to be False succeeded."
+assertFalse True = error "False assert failed."
+assertFalse _	 = "False assert succeeded."
 
 
 -- returns the number of 'a' present in the given list
