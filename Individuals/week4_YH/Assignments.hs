@@ -2,7 +2,6 @@ module Assignments where
 
 import SetOrd
 import Utils
-import Assignment3
 --Assignment3 comes from last week. Needed here to generate random lists.
 
 {-- A2 --}
@@ -14,7 +13,7 @@ import Assignment3
 
 generateRandomSet :: IO ()
 generateRandomSet = do 
-		randomList <- genIntList''
+		randomList <- genIntList
 		putStrLn $ show $ list2set randomList
 
 
@@ -93,13 +92,104 @@ emptyList = []
 -- So this should always be true since  intersection of any set with itself is itself. 
 randomTestIntersection :: IO ()
 randomTestIntersection = do 
-		randomList <- genIntList''
-		putStrLn $ show $ assert ( intersection (list2set randomList) (list2set randomList) == (list2set randomList))
+		randomList <- genIntList
+		putStrLn $ show $ assertTrue ( intersection (list2set randomList) (list2set randomList) == (list2set randomList))
 
 randomTestIntersection2 :: IO ()
 randomTestIntersection2 = do 
-		list1 <- genIntList''
-		list2 <- genIntList''
-		putStrLn $ show $ assert (subSet (intersection (list2set list1) (list2set list2) ) (list2set list2) && subSet (intersection (list2set list1) (list2set list2) ) (list2set list1))
+		list1 <- genIntList
+		list2 <- genIntList
+		putStrLn $ show $ assertTrue (subSet (intersection (list2set list1) (list2set list2) ) (list2set list2) && subSet (intersection (list2set list1) (list2set list2) ) (list2set list1))
+
+
+
+{-Assignment 4
+Suppose we implement binary relations as list of pairs, Haskell type [(a,a)].
+
+Assume the following definitions:
+type Rel a = [(a,a)]
+infixr 5 @@
+
+(@@) :: Eq a => Rel a -> Rel a -`> Rel a
+r @@ s =
+	nub [ (x,z) | (x,y) <- r, (w,z) <- s, y == w ]
+
+Use this to implement a function
+trClos :: Ord a => Rel a -> Rel a
+
+that gives the transitive closure of a relation, where the relation is
+represented as a list of pairs.
+E.g., trClos [(1,2),(2,3),(3,4)] should give
+[(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)].
+(Deliverable: Haskell program, indication of time spent.)
+-}
+
+type Rel a = [(a,a)]
+--infixr 5 @@
+
+--(@@) :: Eq a => Rel a -> Rel a -> Rel a
+--r @@ s =
+--	nub [ (x,z) | (x,y) <- r, (w,z) <- s, y == w ]
+
+
+ones = 1 : twos
+twos = 2 : ones
+
+
+
+
+{- Assignment 5
+Test the function trClos from the previous exercise. Devise your own
+test method for this. Try to use random test generation. Dene reasonable properties to test.
+(Deliverables: test code, short test report, indication of time spent.)
+-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+reverse' :: [a] -> [a]
+reverse' []  = []
+--reverse' [x] = [x]
+reverse' (x:xx) = reverse' xx ++ [x]
+ 
+
+
+f :: Int -> Int
+f y = f' y 0 0
+
+f' :: Int -> Int -> Int -> Int
+f' y n x = if n < y then
+	let
+		x' = x + 2*n + 1
+		n' = n + 1
+		in f' y n' x'
+	else x
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
