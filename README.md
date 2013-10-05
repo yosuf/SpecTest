@@ -5,6 +5,8 @@ Software Testing Group GR_D1_2
 
 This Project contains the assignments of Software Testing and Specification of Software Engineering Master Programme of University of Amsterdam (UvA) 2013.
 
+[Course page on Jan's home](http://homepages.cwi.nl/~jve/courses/13/testing2013)
+
 Rules for collaborators (:
 No branching. Use The master branch only or just keep local branches.
 
@@ -38,6 +40,3 @@ week1_PS \n
 
 week5_KH \n
 week5_PS \n
-
-
-[Wiki](https://github.com/yosuf/SpecTest/wiki)
