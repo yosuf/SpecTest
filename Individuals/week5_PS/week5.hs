@@ -87,5 +87,5 @@ genNRC = do
 		   solveShowNs [s]
 
 
-{-5 Test the program
+{-5 Test the programs
   Property to test is whether the generated sudoku problems are minimal -}
