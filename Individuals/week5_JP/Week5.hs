@@ -210,6 +210,9 @@ values    = [1..9]
 blocks :: [[Int]]
 blocks = [[1..3],[4..6],[7..9]]
 
+subBlocks :: [[Int]]
+subBlocks = [[2..4],[6..8]]
+
 showDgt :: Value -> String
 showDgt 0 = " "
 showDgt d = show d
@@ -256,11 +259,17 @@ showSudoku :: Sudoku -> IO()
 showSudoku = showGrid . sud2grid
 
 bl :: Int -> [Int]
-bl x = concat $ filter (elem x) blocks 
+bl x = concat $ filter (elem x) blocks
+
+bl2 :: Int -> [Int]
+bl2 x = concat $ filter (elem x) subBlocks
 
 subGrid :: Sudoku -> (Row,Column) -> [Value]
 subGrid s (r,c) = 
   [ s (r',c') | r' <- bl r, c' <- bl c ]
+
+subSubGrid :: Sudoku -> (Row,Column) -> [Value]
+subSubGrid s (r,c) = [ s (r',c') | r' <- bl2 r, c' <- bl2 c ]
 
 freeInSeq :: [Value] -> [Value]
 freeInSeq seq = values \\ seq 
@@ -276,11 +285,15 @@ freeInColumn s c =
 freeInSubgrid :: Sudoku -> (Row,Column) -> [Value]
 freeInSubgrid s (r,c) = freeInSeq (subGrid s (r,c))
 
+freeInSubSubgrid :: Sudoku -> (Row,Column) -> [Value]
+freeInSubSubgrid s (r,c) = freeInSeq (subSubGrid s (r,c))
+
 freeAtPos :: Sudoku -> (Row,Column) -> [Value]
 freeAtPos s (r,c) = 
   (freeInRow s r) 
    `intersect` (freeInColumn s c) 
    `intersect` (freeInSubgrid s (r,c)) 
+   `intersect` (freeInSubSubgrid s (r,c))
 
 injective :: Eq a => [a] -> Bool
 injective xs = nub xs == xs
