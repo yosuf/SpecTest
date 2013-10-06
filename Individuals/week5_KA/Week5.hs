@@ -281,7 +281,7 @@ freeAtPos s (r,c) =
   (freeInRow s r) 
    `intersect` (freeInColumn s c) 
    `intersect` (freeInSubgrid s (r,c)) 
-
+   
 injective :: Eq a => [a] -> Bool
 injective xs = nub xs == xs
 
@@ -304,7 +304,7 @@ consistent s = and $
                [ colInjective s c |  c <- positions ]
                 ++
                [ subgridInjective s (r,c) | 
-                    r <- [1,4,7], c <- [1,4,7]]
+                    r <- [1,4,7], c <- [1,4,7]]			
 
 extend :: Sudoku -> (Row,Column,Value) -> Sudoku
 extend s (r,c,v) (i,j) | (i,j) == (r,c) = v
@@ -432,4 +432,3 @@ example5 = [[1,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,7,0,0],
             [0,0,0,0,0,0,0,8,0],
             [0,0,0,0,0,0,0,0,9]]
-
