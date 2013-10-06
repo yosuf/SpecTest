@@ -4,10 +4,10 @@
 
  --------------------------------------------------------}
 
-module RandomSudoku where 
+module LibLecture.RandomSodoku where 
 
 import Data.List
-import Week5
+import LibLecture.Week5Lecture
 import System.Random
 
 emptyN :: Node

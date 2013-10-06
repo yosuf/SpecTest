@@ -207,42 +207,81 @@ positions, values :: [Int]
 positions = [1..9]
 values    = [1..9] 
 
-blocks :: [[Int]]
-blocks = [[1..3],[4..6],[7..9]]
+--blocks :: [[Int]]
+--blocks = [[1..3],[4..6],[7..9]]
 
 showDgt :: Value -> String
 showDgt 0 = " "
 showDgt d = show d
 
-showRow :: [Value] -> IO()
+showRow :: [Value] -> IO()                 {- exercise 4 -}
 showRow [a1,a2,a3,a4,a5,a6,a7,a8,a9] = 
- do  putChar '|'         ; putChar ' '
-     putStr (showDgt a1) ; putChar ' '
-     putStr (showDgt a2) ; putChar ' '
-     putStr (showDgt a3) ; putChar ' '
-     putChar '|'         ; putChar ' '
-     putStr (showDgt a4) ; putChar ' '
-     putStr (showDgt a5) ; putChar ' '
-     putStr (showDgt a6) ; putChar ' '
-     putChar '|'         ; putChar ' '
-     putStr (showDgt a7) ; putChar ' '
-     putStr (showDgt a8) ; putChar ' '
-     putStr (showDgt a9) ; putChar ' '
-     putChar '|'         ; putChar '\n'
+ do  putChar '|'; putChar ' '             ; putStr (showDgt a1)
+     putChar ' '; putChar ' '             ; putStr (showDgt a2)
+     putChar ' '; putChar ' '             ; putStr (showDgt a3)
+     putChar ' '; putChar '|'; putChar ' '; putStr (showDgt a4)
+     putChar ' '; putChar ' '             ; putStr (showDgt a5)
+     putChar ' '; putChar ' '             ; putStr (showDgt a6)
+     putChar ' '; putChar '|'; putChar ' '; putStr (showDgt a7)
+     putChar ' '; putChar ' '             ; putStr (showDgt a8)
+     putChar ' '; putChar ' '             ; putStr (showDgt a9)
+     putChar ' '; putChar '|'; putChar '\n'
+     
+showRow2 :: [Value] -> IO()         {- exercise 4 -}
+showRow2 [a1,a2,a3,a4,a5,a6,a7,a8,a9] = 
+ do  putChar '|'; putChar ' '             ; putStr (showDgt a1)
+     putChar ' '; putChar '|'             ; putStr (showDgt a2)
+     putChar ' '; putChar ' '             ; putStr (showDgt a3)
+     putChar ' '; putChar '|'; putChar ' '; putStr (showDgt a4)
+     putChar '|'; putChar ' '             ; putStr (showDgt a5)
+     putChar ' '; putChar '|'             ; putStr (showDgt a6)
+     putChar ' '; putChar '|'; putChar ' '; putStr (showDgt a7)
+     putChar ' '; putChar ' '             ; putStr (showDgt a8)
+     putChar '|'; putChar ' '             ; putStr (showDgt a9)
+     putChar ' '; putChar '|'; putChar '\n'
 
-showGrid :: Grid -> IO()
+
+{-
+Grid = [[1,2,3,4,5,6,7,8,9],
+            [2,0,0,0,0,0,0,0,0],
+            [3,0,0,0,0,0,0,0,0],
+            [4,0,0,0,0,0,0,0,0],
+            [5,0,0,0,0,0,0,0,0],
+            [6,0,0,0,0,0,0,0,0],
+            [7,0,0,0,0,0,0,0,0],
+            [8,0,0,0,0,0,0,0,0],
+            [9,0,0,0,0,0,0,0,0]]
+-}
+
+showGrid :: Grid -> IO()              {- exercise 4 -}
 showGrid [as,bs,cs,ds,es,fs,gs,hs,is] =
- do putStrLn ("+-------+-------+-------+")
-    showRow as; showRow bs; showRow cs
-    putStrLn ("+-------+-------+-------+")
-    showRow ds; showRow es; showRow fs
-    putStrLn ("+-------+-------+-------+")
-    showRow gs; showRow hs; showRow is
-    putStrLn ("+-------+-------+-------+")
+ do putStrLn ("+---------+---------+---------+")
+    showRow as; 
+    putStrLn ("|   +-----|--+   +--|-----+   |")
+    showRow2 bs; 
+  --putStrLn ("|   |     |  |   |  |     |   |")
+    showRow2 cs
+    putStrLn ("+---------+---------+---------+")
+    showRow2 ds; 
+    putStrLn ("|   +-----|--+   +--|-----+   |")
+    showRow es; 
+    putStrLn ("|   +-----|--+   +--|-----+   |")
+    showRow2 fs
+    putStrLn ("+---------+---------+---------+")
+    showRow2 gs; 
+  --putStrLn ("|   |     |  |   |  |     |   |")
+    showRow2 hs; 
+    putStrLn ("|   +-----|--+   +--|-----+   |")
+    showRow is
+    putStrLn ("+---------+---------+---------+")
 
 type Sudoku = (Row,Column) -> Value
 
-sud2grid :: Sudoku -> Grid
+sud2grid :: Sudoku -> Grid   {- sud2grid ( \ (x,y) -> 9 )   
+                                OR
+                                s = (x,y) -> 4
+                                sud2grid s     -}
+
 sud2grid s = 
   [ [ s (r,c) | c <- [1..9] ] | r <- [1..9] ] 
 
@@ -258,9 +297,26 @@ showSudoku = showGrid . sud2grid
 bl :: Int -> [Int]
 bl x = concat $ filter (elem x) blocks 
 
+
+blocks :: [[Int]]
+blocks = [[1..3],[4..6],[7..9]]
+
 subGrid :: Sudoku -> (Row,Column) -> [Value]
 subGrid s (r,c) = 
   [ s (r',c') | r' <- bl r, c' <- bl c ]
+
+blocks' :: [[Int]]       {- exercise 4 -}
+blocks' = [[2..4],[6..8]]
+
+bl' :: Int -> [Int]      {- exercise 4 -}
+bl' x = concat $ filter (elem x) blocks'   
+  
+subGrid' :: Sudoku -> (Row,Column) -> [Value]   {- exercise 4 -}
+subGrid' s (r,c) = 
+  [ s (r',c') | r' <- bl' r, c' <- bl' c ]  
+
+
+
 
 freeInSeq :: [Value] -> [Value]
 freeInSeq seq = values \\ seq 
@@ -276,11 +332,15 @@ freeInColumn s c =
 freeInSubgrid :: Sudoku -> (Row,Column) -> [Value]
 freeInSubgrid s (r,c) = freeInSeq (subGrid s (r,c))
 
+freeInSubgrid' :: Sudoku -> (Row,Column) -> [Value]    {- exercise 4 -}
+freeInSubgrid' s (r,c) = freeInSeq (subGrid s (r,c))
+
 freeAtPos :: Sudoku -> (Row,Column) -> [Value]
 freeAtPos s (r,c) = 
   (freeInRow s r) 
    `intersect` (freeInColumn s c) 
    `intersect` (freeInSubgrid s (r,c)) 
+   `intersect` (freeInSubgrid' s (r,c))  {- exercise 4 -}
 
 injective :: Eq a => [a] -> Bool
 injective xs = nub xs == xs
@@ -297,6 +357,12 @@ subgridInjective :: Sudoku -> (Row,Column) -> Bool
 subgridInjective s (r,c) = injective vs where 
    vs = filter (/= 0) (subGrid s (r,c))
 
+{- exercise 4 - start -}
+subgridInjective' :: Sudoku -> (Row,Column) -> Bool
+subgridInjective' s (r,c) = injective vs where 
+   vs = filter (/= 0) (subGrid' s (r,c))   
+{- exercise 4 - end -}
+
 consistent :: Sudoku -> Bool
 consistent s = and $
                [ rowInjective s r |  r <- positions ]
@@ -305,6 +371,10 @@ consistent s = and $
                 ++
                [ subgridInjective s (r,c) | 
                     r <- [1,4,7], c <- [1,4,7]]
+                ++ 
+               [ subgridInjective' s (r,c) |        {- exercise 4 -}
+                    r <- [2,6], c <- [2,6]]
+
 
 extend :: Sudoku -> (Row,Column,Value) -> Sudoku
 extend s (r,c,v) (i,j) | (i,j) == (r,c) = v
@@ -338,10 +408,18 @@ prune (r,c,v) ((x,y,zs):rest)
   | c == y = (x,y,zs\\[v]) : prune (r,c,v) rest
   | sameblock (r,c) (x,y) = 
         (x,y,zs\\[v]) : prune (r,c,v) rest
+  | sameblock' (r,c) (x,y) =                     {- exercise 4 -}
+        (x,y,zs\\[v]) : prune (r,c,v) rest      
   | otherwise = (x,y,zs) : prune (r,c,v) rest
 
 sameblock :: (Row,Column) -> (Row,Column) -> Bool
 sameblock (r,c) (x,y) = bl r == bl x && bl c == bl y 
+
+
+{- exercise 4 -}
+sameblock' :: (Row,Column) -> (Row,Column) -> Bool
+sameblock' (r,c) (x,y) = bl' r == bl' x && bl' c == bl' y 
+
 
 initNode :: Grid -> [Node]
 initNode gr = let s = grid2sud gr in 
@@ -432,3 +510,32 @@ example5 = [[1,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,7,0,0],
             [0,0,0,0,0,0,0,8,0],
             [0,0,0,0,0,0,0,0,9]]
+
+example6 :: Grid 
+example6 = [[0,0,0,3,0,0,0,0,0],
+            [0,0,0,7,0,0,3,0,0],
+            [2,0,0,0,0,0,0,0,8],
+            [0,0,6,0,0,5,0,0,0],
+            [0,9,1,6,0,0,0,0,0],
+            [3,0,0,0,7,1,2,0,0],
+            [0,0,0,0,0,0,0,3,1],
+            [0,8,0,0,4,0,0,0,0],
+            [0,0,2,0,0,0,0,0,0]]
+
+-- +---------+---------+---------+
+-- |         | 3       |         |
+-- |   +-----|--+   +--|-----+   |
+-- |   |     | 7|   |  | 3   |   |
+-- | 2 |     |  |   |  |     | 8 |
+-- +---------+---------+---------+
+-- |   |   6 |  |   |5 |     |   |
+-- |   +-----|--+   +--|-----+   |
+-- |    9  1 | 6       |         |
+-- |   +-----|--+   +--|-----+   |
+-- | 3 |     |  | 7 |1 | 2   |   |
+-- +---------+---------+---------+
+-- |   |     |  |   |  |    3| 1 |
+-- |   |8    |  | 4 |  |     |   |
+-- |   +-----|--+   +--|-----+   |
+-- |       2 |         |         |
+-- +---------+---------+---------+
