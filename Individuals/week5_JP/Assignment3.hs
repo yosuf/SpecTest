@@ -16,20 +16,32 @@ nrc =  [[0,0,0,3,0,0,0,0,0],
         [0,8,0,0,4,0,0,0,0],
         [0,0,2,0,0,0,0,0,0]]
 
+{-
+See Week5.hs for the adapted solver for NRC style sudoku's
 
+Adaptions carried out:
+ line 213: added nrcblocks
+ line 264: added nrcbl
+ line 271: added nrcGrid
+ line 288: added freeInNrcGrid
+ line 296: added intersection with freeInNrcGrid to freeAtPos
+ line 357: added includes test for NRC-subblocks to sameblock
+ - 
 
-a :: Grid
-a = [
- [6,7,8, 3,9,2, 4,1,5], 
- [5,1,0, 7,6,8, 3,2,9],
- [2,3,9, 0,1,4, 6,7,8],
+Solution of the sudoku above:
 
- [7,2,0, 0,8,5, 0,9,3],
- [8,9,1, 0,2,3, 5,4,7],
- [3,4,5, 9,7,1, 2,8,6],
++-------+-------+-------+
+| 4 7 8 | 3 9 2 | 6 1 5 |
+| 6 1 9 | 7 5 8 | 3 2 4 |
+| 2 3 5 | 4 1 6 | 9 7 8 |
++-------+-------+-------+
+| 7 2 6 | 8 3 5 | 1 4 9 |
+| 8 9 1 | 6 2 4 | 7 5 3 |
+| 3 5 4 | 9 7 1 | 2 8 6 |
++-------+-------+-------+
+| 5 6 7 | 2 8 9 | 4 3 1 |
+| 9 8 3 | 1 4 7 | 5 6 2 |
+| 1 4 2 | 5 6 3 | 8 9 7 |
++-------+-------+-------+
 
- [4,6,7, 2,5,9, 8,3,1],
- [9,8,3, 1,4,6, 7,5,2],
- [1,5,2, 8,3,7, 9,6,4]]
-
-asud = grid2sud a
+-}

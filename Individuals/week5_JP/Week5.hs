@@ -210,8 +210,8 @@ values    = [1..9]
 blocks :: [[Int]]
 blocks = [[1..3],[4..6],[7..9]]
 
-subBlocks :: [[Int]]
-subBlocks = [[2..4],[6..8]]
+nrcblocks :: [[Int]]
+nrcblocks = [[2..4],[6..8]]
 
 showDgt :: Value -> String
 showDgt 0 = " "
@@ -261,15 +261,15 @@ showSudoku = showGrid . sud2grid
 bl :: Int -> [Int]
 bl x = concat $ filter (elem x) blocks
 
-bl2 :: Int -> [Int]
-bl2 x = concat $ filter (elem x) subBlocks
+nrcbl :: Int -> [Int]
+nrcbl x = concat $ filter (elem x) nrcblocks
 
 subGrid :: Sudoku -> (Row,Column) -> [Value]
 subGrid s (r,c) = 
   [ s (r',c') | r' <- bl r, c' <- bl c ]
 
-subSubGrid :: Sudoku -> (Row,Column) -> [Value]
-subSubGrid s (r,c) = [ s (r',c') | r' <- bl2 r, c' <- bl2 c ]
+nrcGrid :: Sudoku -> (Row,Column) -> [Value]
+nrcGrid s (r,c) = [ s (r',c') | r' <- nrcbl r, c' <- nrcbl c ]
 
 freeInSeq :: [Value] -> [Value]
 freeInSeq seq = values \\ seq 
@@ -285,15 +285,15 @@ freeInColumn s c =
 freeInSubgrid :: Sudoku -> (Row,Column) -> [Value]
 freeInSubgrid s (r,c) = freeInSeq (subGrid s (r,c))
 
-freeInSubSubgrid :: Sudoku -> (Row,Column) -> [Value]
-freeInSubSubgrid s (r,c) = freeInSeq (subSubGrid s (r,c))
+freeInNrcGrid :: Sudoku -> (Row,Column) -> [Value]
+freeInNrcGrid s (r,c) = freeInSeq (nrcGrid s (r,c))
 
 freeAtPos :: Sudoku -> (Row,Column) -> [Value]
 freeAtPos s (r,c) = 
   (freeInRow s r) 
    `intersect` (freeInColumn s c) 
    `intersect` (freeInSubgrid s (r,c)) 
-   `intersect` (freeInSubSubgrid s (r,c))
+   `intersect` (freeInNrcGrid s (r,c))
 
 injective :: Eq a => [a] -> Bool
 injective xs = nub xs == xs
@@ -354,7 +354,7 @@ prune (r,c,v) ((x,y,zs):rest)
   | otherwise = (x,y,zs) : prune (r,c,v) rest
 
 sameblock :: (Row,Column) -> (Row,Column) -> Bool
-sameblock (r,c) (x,y) = (bl r == bl x && bl c == bl y) || (bl2 r == bl2 x && bl2 c == bl2 y)
+sameblock (r,c) (x,y) = (bl r == bl x && bl c == bl y) || (nrcbl r == nrcbl x && nrcbl c == nrcbl y)
 
 initNode :: Grid -> [Node]
 initNode gr = let s = grid2sud gr in 
