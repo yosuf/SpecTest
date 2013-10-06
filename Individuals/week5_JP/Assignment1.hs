@@ -10,7 +10,9 @@ mergeSrt [] = []
 mergeSrt (x:xs) = merge [x] (mergeSrt xs)
 
 mergeSrtA :: Ord a => [a] -> [a]
-mergeSrtA = assert1 (\ unsorted sorted -> (length unsorted) == (length sorted)) mergeSrt
+mergeSrtA = assert1 lengthProp mergeSrt
+
+lengthProp xs ys = (length xs) == (length ys)
 
 {-
     TimeSpend = 30 minutes
