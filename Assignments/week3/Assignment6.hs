@@ -54,6 +54,7 @@ testForms n prop = do
 
 
 -- Code from last week -->
+-- VVZ: Y U NO IMPORT?
 cnf :: Form -> Form
 cnf (Dsj [p, Cnj [q, r]]) = Cnj[cnf(Dsj [p,q]), cnf(Dsj [p,r])]
 cnf (Dsj [Cnj [p,q], r]) = Cnj[cnf(Dsj [p,r]), cnf(Dsj [q,r])]
@@ -74,6 +75,7 @@ equiv f1 f2 = tautology (Equiv f1 f2)
   pre  : propositional formula
   post : True when no Cnj's are inside Dsj's
 -}
+-- VVZ: strictly speaking, a returned value does not have to be perceived as a postcondition.
 isCnf (Cnj f) = and (map isCnf f)
 isCnf (Dsj f) = and (map isCnf' f)
 isCnf f = True

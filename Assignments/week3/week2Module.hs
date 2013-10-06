@@ -169,7 +169,7 @@ satisfiable f = any (\ v -> eval v f) (allVals f)
 
 {- ps: example to check this is : 
 satifiable (Dsj [Prop 1 , Prop 2]) -}
-
+-- VVZ: it is spelled "satisfiable"
 
 
 -- no precondition: should work for any formula. 

@@ -43,6 +43,7 @@ generator for integer lists from Exercise 3 to test isPermutation.-}
 -- The returned list should only contain True.
 testIsPermutation ::[ Bool ]
 testIsPermutation = [	isPermutation (delete 1 [1]) (delete 1 [1]), 
+						-- VVZ: why not []?
 						isPermutation [1] [1] ,
 						isPermutation [2,2] [2,2], 
 						isPermutation [0,2,0] [0,0,2], -- Example from the lab assignment
@@ -61,6 +62,7 @@ testIsNotPermutation =  [ 	isPermutation [] [0],
 							isPermutation [0..10] [1..11] 
 						]
 
+-- VVZ: the functions testIsPermutation and testIsNotPermutation are not really requested by the assignment, but they can serve as a warm up exercise for you to get to the juicy parts of test generation.
 
 testRandomPermutation :: IO ()
 testRandomPermutation = do
@@ -70,6 +72,7 @@ testRandomPermutation = do
 
 
 -- Jeroen
+-- VVZ: funky!
 testIsPermutation' :: ([Bool] -> Bool) -> ([[Int] -> [Int]]) -> (IO Bool)
 testIsPermutation' _ [] = fail "Provide transformational list functions"
 testIsPermutation' t fs = do  l <- genIntList
