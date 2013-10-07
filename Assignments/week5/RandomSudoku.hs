@@ -7,7 +7,7 @@
 module RandomSudoku where 
 
 import Data.List
-import Week5
+import Week5Adapted
 import System.Random
 
 emptyN :: Node
