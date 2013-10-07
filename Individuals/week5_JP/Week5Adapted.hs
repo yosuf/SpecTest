@@ -1,4 +1,4 @@
-module Week5
+module Week5Adapted
 
 where
 
