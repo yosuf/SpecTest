@@ -16,6 +16,17 @@ nrc =  [[0,0,0,3,0,0,0,0,0],
         [0,8,0,0,4,0,0,0,0],
         [0,0,2,0,0,0,0,0,0]]
 
+inconsistent :: Grid
+inconsistent =[	[5,3,0,0,7,0,0,0,0],
+            	[6,0,0,1,9,5,0,0,0],
+            	[0,9,8,0,0,0,0,6,0],
+            	[8,0,9,0,6,0,0,0,3],
+            	[4,0,0,8,0,3,0,0,1],
+            	[7,0,0,0,2,0,0,0,6],
+            	[0,6,0,0,0,0,2,8,0],
+            	[0,0,0,4,1,9,0,0,5],
+            	[0,0,0,0,8,0,0,7,9]]
+
 {-
 See Week5Adapted.hs for the adapted solver for NRC style sudoku's
 
@@ -24,8 +35,10 @@ Adaptions carried out:
  line 264: added nrcbl
  line 271: added nrcGrid
  line 288: added freeInNrcGrid
- line 296: added intersection with freeInNrcGrid to freeAtPos
- line 357: added includes test for NRC-subblocks to sameblock
+ line 296: added intersection with freeInNrcGrid to freeAtPos.
+ line 309: adapted subgridInjective to check for nrcblocks as well.  
+ line 321: adapted consistent to check for nrc windoku consistency.  It can be tested with "inconsistent" sudoku
+ line 358: added includes test for NRC-subblocks to sameblock
  - 
 
 Solution of the sudoku above:

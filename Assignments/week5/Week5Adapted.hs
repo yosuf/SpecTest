@@ -1,4 +1,4 @@
-module Week5
+module Week5Adapted
 
 where
 
@@ -307,8 +307,7 @@ colInjective s c = injective vs where
    vs = filter (/= 0) [ s (i,c) | i <- positions ]
 
 subgridInjective :: Sudoku -> (Row,Column) -> Bool
-subgridInjective s (r,c) = injective vs where 
-   vs = filter (/= 0) (subGrid s (r,c))
+subgridInjective s (r,c) = ( injective $ filter (/= 0) (subGrid s (r,c)) ) &&  ( injective $ filter (/= 0) (nrcGrid s (r,c)) )
 
 consistent :: Sudoku -> Bool
 consistent s = and $
@@ -317,7 +316,10 @@ consistent s = and $
                [ colInjective s c |  c <- positions ]
                 ++
                [ subgridInjective s (r,c) | 
-                    r <- [1,4,7], c <- [1,4,7]]
+                    r <- [1,4,7], c <- [1,4,7] ]
+                ++
+               [ subgridInjective s (r,c) | 
+                    r <- [2,6], c <- [2,6] ]
 
 extend :: Sudoku -> (Row,Column,Value) -> Sudoku
 extend s (r,c,v) (i,j) | (i,j) == (r,c) = v
