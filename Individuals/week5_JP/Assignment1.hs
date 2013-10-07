@@ -3,7 +3,7 @@ module Assignment1
 where
 
 import Data.List
-import Week5
+import Week5Adapted
 
 mergeSrt :: Ord a => [a] -> [a]
 mergeSrt [] = []
