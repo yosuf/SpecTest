@@ -17,17 +17,29 @@ removeAll (y:ys) xs = removeAll ys (delete y xs)
 isSudokuPerm :: [Int] -> Bool
 isSudokuPerm = isPermutation values
 
--- collects all column valuations
+-- gives all column valuations
 columnValuations :: Sudoku -> [[Value]]
 columnValuations s = [[s (y,x) | x <- positions] | y <- positions]
 
--- collects all line valuations
+-- gives all line valuations
 lineValuations :: Sudoku -> [[Value]]
 lineValuations s =  [[s (y,x) | y <- positions] | x <- positions]
 
+-- gives all block valuation
+blockValuations :: [[Int]] -> Sudoku -> [[Value]]
+blockValuations blocks s = [[s (y,x) | x <- xs, y <- ys] | xs <- blocks, ys <- blocks]
+
+-- gives all standard block valuations
+standardBlockValuations :: Sudoku -> [[Value]]
+standardBlockValuations = blockValuations blocks
+
+-- gives all NRC block valuations
+nrcValuations :: Sudoku -> [[Value]]
+nrcValuations = blockValuations nrcblocks
+
 -- collects all valuations
 collectValuations :: Sudoku -> [[Value]]
-collectValuations s = (lineValuations s) ++ (columnValuations s)
+collectValuations s = (lineValuations s) ++ (columnValuations s) ++ (standardBlockValuations s) ++ (nrcValuations s)
 
 -- property that holds when all valuations of the Sudoku are permutations of [1..9]
 valuationsPermutationProp :: Sudoku -> Bool
