@@ -3,10 +3,10 @@ Week 5 Assignment
 
 Who is busy with what?
 
-- [x] Assignment 1: Prajan (Status Complete), Khosrow (Complete)
-- [x] Assignment 2: Prajan (In progress..),  Khosrow (Complete)
-- [x] Assignment 3: Yosuf (In progress..),  Khosrow (In progress..)
-- [ ] Assignment 4: 
+- [x] Assignment 1: Complete
+- [x] Assignment 2: Complete
+- [x] Assignment 3: Complete
+- [ ] Assignment 4: Jeroen (In Progress)
 - [ ] Assignment 5: 
 
  
