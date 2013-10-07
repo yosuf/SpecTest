@@ -2,6 +2,7 @@ module Assignment5 where
 
 import Data.List
 import Week5Adapted
+import RandomSudoku
 import Assignment3
 
 -- isPermutation from Week 3
@@ -45,5 +46,13 @@ collectValuations s = (lineValuations s) ++ (columnValuations s) ++ (standardBlo
 valuationsPermutationProp :: Sudoku -> Bool
 valuationsPermutationProp s = and [isSudokuPerm valuation | valuation <- collectValuations s]
 
+main2 :: IO Int
+main2 = do  [r] <- rsolveNs [emptyN]
+            showNode r
+            s  <- genProblem r
+            showNode s
+            let solv = solveNs [s]
+            return $ length  solv
+            --solveShowNs [s]
 
-snrc = (fst $ (solveNs (initNode nrc)) !! 0)
+a = (fst $ (solveNs (initNode example1)) !! 0)
