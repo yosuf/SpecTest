@@ -14,6 +14,8 @@ isPermutation ys xs     | length ys /= length xs        = False
 removeAll [] xs = xs
 removeAll (y:ys) xs = removeAll ys (delete y xs)
 
+while1 = until . (not.)
+
 
 isSudokuPerm :: [Int] -> Bool
 isSudokuPerm = isPermutation values
@@ -46,13 +48,17 @@ collectValuations s = (lineValuations s) ++ (columnValuations s) ++ (standardBlo
 valuationsPermutationProp :: Sudoku -> Bool
 valuationsPermutationProp s = and [isSudokuPerm valuation | valuation <- collectValuations s]
 
-main2 :: IO Int
-main2 = do  [r] <- rsolveNs [emptyN]
-            showNode r
-            s  <- genProblem r
-            showNode s
-            let solv = solveNs [s]
-            return $ length  solv
-            --solveShowNs [s]
+--tests the solutions ([Node]) for the given property (Sudoku -> Bool)
+test :: (Sudoku -> Bool) -> [Node] -> Bool
+test prop nodes = and [prop $ fst n | n <- nodes]
+
+doTenTests = doTest 10
+doTest n = do   [r] <- rsolveNs [emptyN]
+                p <- genProblem r
+                let solutions = solveNs [p]
+                showNode p
+                putStrLn $ "Number of solutions = " ++ (show $ length solutions)
+                putStrLn $ "Has permutation property? " ++ (show $ test valuationsPermutationProp solutions)
+                if n > 0 then doTest (n-1) else return()
 
 a = (fst $ (solveNs (initNode example1)) !! 0)
