@@ -66,4 +66,4 @@ doTest n = do   [r] <- rsolveNs [emptyN]
                 let solutions = solveNs [p]
                 putStrLn $ "Has minimal property = " ++ (show $ minimalProperty $ fst p)
                 putStrLn $ "Has permutation property? " ++ (show $ test valuationsPermutationProp solutions)
-                if n > 0 then doTest (n-1) else return()
+                if n > 1 then doTest (n-1) else return()
