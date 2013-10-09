@@ -7,6 +7,6 @@ Who is busy with what?
 - [x] Assignment 2: Complete
 - [x] Assignment 3: Complete
 - [x] Assignment 4: Complete
-- [ ] Assignment 5: Jeroen (In Progress)
+- [x] Assignment 5: Complete
 
  
