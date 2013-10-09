@@ -14,9 +14,7 @@ isPermutation ys xs     | length ys /= length xs        = False
 removeAll [] xs = xs
 removeAll (y:ys) xs = removeAll ys (delete y xs)
 
-while1 = until . (not.)
-
-
+-- property that a given list is a permutation of possible Sudoku values
 isSudokuPerm :: [Int] -> Bool
 isSudokuPerm = isPermutation values
 
@@ -28,7 +26,7 @@ columnValuations s = [[s (y,x) | x <- positions] | y <- positions]
 lineValuations :: Sudoku -> [[Value]]
 lineValuations s =  [[s (y,x) | y <- positions] | x <- positions]
 
--- gives all block valuation
+-- gives all block valuations
 blockValuations :: [[Int]] -> Sudoku -> [[Value]]
 blockValuations blocks s = [[s (y,x) | x <- xs, y <- ys] | xs <- blocks, ys <- blocks]
 
@@ -48,6 +46,15 @@ collectValuations s = (lineValuations s) ++ (columnValuations s) ++ (standardBlo
 valuationsPermutationProp :: Sudoku -> Bool
 valuationsPermutationProp s = and [isSudokuPerm valuation | valuation <- collectValuations s]
 
+solve s = solveNs [(s, constraints s)]
+
+oneSolution nodes = (length nodes) == 1
+
+-- a Sudoku is minimal if it has one solution, and erasing each filled position of the Sudoku does not lead to a single solution
+minimalProperty :: Sudoku -> Bool
+minimalProperty s = (oneSolution $ solve s) &&
+                    and [ (length $ solve $ eraseS s rc) /= 1 | rc <- filledPositions s]
+
 --tests the solutions ([Node]) for the given property (Sudoku -> Bool)
 test :: (Sudoku -> Bool) -> [Node] -> Bool
 test prop nodes = and [prop $ fst n | n <- nodes]
@@ -55,10 +62,8 @@ test prop nodes = and [prop $ fst n | n <- nodes]
 doTenTests = doTest 10
 doTest n = do   [r] <- rsolveNs [emptyN]
                 p <- genProblem r
-                let solutions = solveNs [p]
                 showNode p
-                putStrLn $ "Number of solutions = " ++ (show $ length solutions)
+                let solutions = solveNs [p]
+                putStrLn $ "Has mimimal property = " ++ (show $ minimalProperty $ fst p)
                 putStrLn $ "Has permutation property? " ++ (show $ test valuationsPermutationProp solutions)
                 if n > 0 then doTest (n-1) else return()
-
-a = (fst $ (solveNs (initNode example1)) !! 0)
