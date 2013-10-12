@@ -1,0 +1,1 @@
+../../Assignments/week6/Week6.hs
