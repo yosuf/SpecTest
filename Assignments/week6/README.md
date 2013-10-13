@@ -3,7 +3,7 @@ Week 6 Assignment
 
 Who is busy with what?
 
-- [ ] Assignment 1: Jeroen (In Progress), Yosuf (Done)
+- [ ] Assignment 1: Jeroen (In Progress), Yosuf (Done), Khosrow (in progress)
 - [ ] Assignment 2: Yosuf (In Progress)
 - [ ] Assignment 3: 
 - [ ] Assignment 4:  
