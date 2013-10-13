@@ -5,7 +5,7 @@ Who is busy with what?
 
 - [ ] Assignment 1: Jeroen (In Progress), Yosuf (Done), Khosrow (in progress)
 - [ ] Assignment 2: Yosuf (In Progress)
-- [ ] Assignment 3: 
+- [ ] Assignment 3: Yosuf (Done)
 - [ ] Assignment 4:  
 - [ ] Assignment 5: 
 - [ ] Assignment 6: 
