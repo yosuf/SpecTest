@@ -12,6 +12,11 @@ carmichael = [ (6*k+1)*(12*k+1)*(18*k+1) |
       isPrime (12*k+1), 
       isPrime (18*k+1) ]
 
+
+leafCount :: BinTree -> Integer
+leafCount (L ) = 1
+leafCount (N t1 t2) = leafCount t1 + leafCount t2
+
 -- Assignment 1
 -- according to specification
 exM' :: Integer -> Integer -> Integer -> Integer
