@@ -34,8 +34,7 @@ splitMergeSrt xs =
 assertiveSplitMergeSrt :: Ord a => [a] -> [a]
 assertiveSplitMergeSrt xs = mergeSrtAssert1 sorted splitMergeSrt xs
 
--- assign 3
--- 
+-- assign 3 
 {- NRC requirements
    The members of every subgrid [i; j] with i; j ranging over 1::3, 4::6 and
    7::9 should be all different And also the members of every subgrid [i; j] with i; j ranging over 
