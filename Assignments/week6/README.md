@@ -8,8 +8,8 @@ Who is busy with what?
 - [x] Assignment 3: Yosuf (Done)
 - [x] Assignment 4: Yosuf (Done)
 - [x] Assignment 5: Yosuf (Done)
-- [ ] Assignment 6: YH-iP
-- [ ] Assignment 7: YH-iP
+- [x] Assignment 6: Yosuf (Done)
+- [ ] Assignment 7: Yosuf (In progress)
 - [ ] Assignment 8 (Optional):  
 
  
