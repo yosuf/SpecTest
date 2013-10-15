@@ -66,7 +66,7 @@ Answer:
 Usage: testF $ take 20 composites
 -}
 testF list = do
-		primes <- sequence [ (primeF 3 x)  |  x <- list ]
+		primes <- sequence [ (primeF n x)  | n <- [3..15] , odd n , x <- list ]
 	 	return [ (x,y) | x <-list , y<- primes ] 
 
 
@@ -86,6 +86,16 @@ carmichael = [ (6*k+1)*(12*k+1)*(18*k+1) |
       isPrime (18*k+1) ]
 
 
+{- Assignment 6:
+Use the list from the previous exercise to test the Miller-Rabin primality check. What do you find?
+
+Remark: Very few false positives!
+
+Usage: testMR $ take 80 carmichael
+-}
+testMR list = do
+		primes <- sequence [ (primeMR n x)  | n <- [3..15] , odd n ,  x <- list ]
+	 	return primes
 
 
 -- logBase comparison
