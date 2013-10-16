@@ -9,7 +9,7 @@ Who is busy with what?
 - [x] Assignment 4: Yosuf (Done)
 - [x] Assignment 5: Yosuf (Done)
 - [x] Assignment 6: Yosuf (Done)
-- [ ] Assignment 7: Yosuf (In progress)
+- [x] Assignment 7: Yosuf (Done)
 - [ ] Assignment 8 (Optional):  
 
  
