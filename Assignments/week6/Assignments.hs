@@ -20,7 +20,23 @@ calcBase2Exp y = getExpRem' 1 y
 testexM' :: Integer-> Integer -> Integer -> Bool
 testexM' x y n = [exM' x' y' n'|x'<- [1..x], y'<-[2..y], n' <- [1..n] ] == [expM x' y' n'|x'<- [1..x], y'<-[2..y], n' <- [1..n] ]
 
+-- Assignment 1 jeroen:
+exM'' :: Integer -> Integer -> Integer -> Integer
+exM'' x k n = (mul $ factorize k $ collect x k n) `mod` n
 
+collect x k n       = (x `mod` n,1) : collect' x k n 2
+collect' x k n k2   | k2 <= k    = let a = x^2 `mod` n in (a, k2) : collect' a k n (k2*2)
+                    | otherwise  =  []
+
+findlargest k [] = (0,0)
+findlargest k (x:xs)  | (snd x) <= k = let a = (findlargest k xs) in if a /= (0,0) then a else x
+                      | otherwise = (0,0)
+
+factorize k l = let a = findlargest k l in
+                    if (snd a) > 1 then a : factorize (k-(snd a)) l else [a]
+
+mul [] = 1
+mul (x:xs) = fst x * mul xs
 
 {- Assignment 2
  Check that your implementation is more effcient than expM by running a number of relevant tests and documenting the results.
@@ -29,10 +45,10 @@ Answer:
 exM' is indeed more effecient.
 Numbers lower than the ones noted below were very small to mention.
 
-expM 	exM' 	args
+expM 	 exM'   exM'' 	args
 -----------------------------------
-1,99s	1,36s	23343 2433333 2534
-19s		9s		23343 24333333 2534
+1,99s	 1,36s	nihil  23343 2433333 2534
+19s		 9s		  nihil  23343 24333333 2534
 
 
  -}
