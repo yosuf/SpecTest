@@ -27,6 +27,7 @@ inconsistent =[	[5,3,0,0,7,0,0,0,0],
             	[0,0,0,4,1,9,0,0,5],
             	[0,0,0,0,8,0,0,7,9]]
 
+-- VVZ: this is the most obfuscated way to submit a solution that I have seen in a while.
 {-
 See Week5Adapted.hs for the adapted solver for NRC style sudoku's
 
