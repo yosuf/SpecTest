@@ -170,3 +170,14 @@ exM x y n = let
               if even y then w
               else multM x w n 
 
+
+data Tree a = T a [Tree a] deriving (Eq,Ord,Show)
+
+myTree = T 1 [T 11 [ T 112 [] ] , T 12 [] ]
+
+countTree :: Tree a -> Int
+countTree (T _ xs) =  1+ sum (map countTree xs)
+
+
+countTree' :: Tree a -> Int
+countTree' (T _ xs) = 1 + sum (map countTree' xs)
