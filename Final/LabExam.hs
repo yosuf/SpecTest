@@ -4,26 +4,33 @@ where
 import Data.List
 import Assert
 
+{- 	
+	Author: Yosuf Haydary (yosuf.haydary@gmail.com)
+	Student number: 10411119
+-}
+
+
 {-
 ===================
 	Question 1
 ===================
 -}
-
 f :: (Integer,Integer) -> (Integer,Integer)
 f = until (odd.snd) (\ (m,n) -> (m+1,n `div` 2))
 
-{-
-Precondition for f: snd>0
+-- part 1
+--Precondition for f: snd>0
+fA = assert1 (\ (s,r) (t,u) ->  u*(2^(t-s)) == r && r>=u && s<=t && odd u ) f
 
+{-
+- part 2
+Explanation: 
 Each time the snd part of the pair is divided by two (if not odd) the fst part of the pair is incremented by one.
 The difference of the fst of the pair shows how many times the snd of the pair is divided by two. 
 So, this difference is the power to 2 to which the snd of the pair can be multiplied to get the original back.
 
 At the same time, the snd should be odd, fst should be greater or equal to original and snd should be smaller or equal.
 -}
-fA = assert1 (\ (s,r) (t,u) ->  u*(2^(t-s)) == r && r>=u && s<=t && odd u ) f
-
 
 
 {-
@@ -69,6 +76,9 @@ But it will only work if The internal nodes, leaves and the given args exactly a
 bintree2btreeA :: Eq a => a -> BinTree a -> Btree a
 bintree2btreeA x bintree = assert2  (\x1 bintree1 btree1 -> (btree2bintree x1 btree1) == bintree1 ) bintree2btree x bintree
 -}
+
+
+
 
 
 {-
@@ -131,11 +141,23 @@ ordered' (x:y:xs) = (fst x) < (fst y) && ordered' (y:xs)
 
 
 
-
 {-
 ===================
 	Question 5
 ===================
+-}
+
+type Dict = BinTree (String,String) 
+
+key, value :: (String,String) -> String
+key (x,_) = x
+value  (_,y) = y 
+
+--dictionary examples
+unorderedDict = B ("A","Letter A") (B ("B", "Letter B") Nil Nil) Nil
+orderedDict = B ("D","Letter D") (B ("C", "Letter C") Nil Nil) Nil
+
+{-
 Implement a function lookUp :: String -> Dict -> [String] that looks up a key in an ordered dictionary. 
 Make sure the lookup function exploits the order. 
 An output [] indicates that the key is not defined in the dictionary, 
@@ -157,6 +179,8 @@ lookUp looking (B dictEntry b1 b2 )  = if looking == (key dictEntry) then [(valu
 ===================
 	Question 6
 ===================
+
+- part 1
 Write code for inserting a new item at the correct position in an ordered dictionary. 
 If the key of the item already occurs in the dictionary, replace the old information with the new information, 
 otherwise just insert the new item. 
@@ -172,31 +196,17 @@ insertKey entry (B dictEntry b1 b2) = if (key entry) == (key dictEntry) then B e
 											else B dictEntry b1 (insertKey entry b2)
 
 
-type Dict = BinTree (String,String) 
+{- part 2
+Next, write an assertive version of this that checks whether an ordered dictionary is still ordered after the insertion. 
+Use the property ordered :: Dict -> Bool that you defined earlier.
+-}
 
---dictionary examples
-unorderedDict = B ("A","Letter A") (B ("B", "Letter B") Nil Nil) Nil
-orderedDict = B ("D","Letter D") (B ("C", "Letter C") Nil Nil) Nil
+insertKeyA :: (String,String) -> Dict -> Dict
+insertKeyA entry dict = assert0 (\d -> ordered d) insertKey entry dict
 
-key, value :: (String,String) -> String
-key (x,_) = x
-value  (_,y) = y 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+assert0 :: (a -> Bool) -> (b -> a -> a) -> b -> a -> a
+assert0 p f x y = if p (f x y) then f x y
+                else error "assert0"
 
 
 
